@@ -1,0 +1,40 @@
+---
+const siteBase = Astro.site ?? new URL(Astro.url.origin);
+const businessUrl = siteBase.href.replace(/\/$/, '');
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'MedicalBusiness',
+	name: 'Clínica 21 Días Psicoeducación',
+	description:
+		'Clínica de psicología en Torrent. Terapia individual, de pareja y familiar, evaluación diagnóstica, logopedia y pedagogía.',
+	url: businessUrl,
+	telephone: '+34640205738',
+	email: 'clinica@21diaspsicoeducacion.es',
+	image: new URL('/flor.png', siteBase).href,
+	address: {
+		'@type': 'PostalAddress',
+		streetAddress: 'Calle San Valeriano 20A',
+		addressLocality: 'Torrent',
+		addressRegion: 'Valencia',
+		addressCountry: 'ES',
+	},
+	openingHoursSpecification: [
+		{
+			'@type': 'OpeningHoursSpecification',
+			dayOfWeek: ['Tuesday', 'Thursday'],
+			opens: '09:30',
+			closes: '14:00',
+		},
+		{
+			'@type': 'OpeningHoursSpecification',
+			dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+			opens: '16:00',
+			closes: '21:00',
+		},
+	],
+	sameAs: ['https://www.instagram.com/21diaspsicoeducacion/'],
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

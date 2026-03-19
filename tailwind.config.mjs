@@ -47,5 +47,14 @@ export default {
       padding: '1rem',
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addBase, theme }) {
+      addBase({
+        'a:focus-visible, button:focus-visible': {
+          outline: `2px solid ${theme('colors.primary.400')}`,
+          outlineOffset: '2px',
+        },
+      });
+    },
+  ],
 }

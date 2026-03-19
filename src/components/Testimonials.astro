@@ -27,9 +27,14 @@ const testimonials = [
       {
         testimonials.map((testimonial) => (
           <div class="bg-white p-6 rounded-lg shadow-md">
-            <div class="flex justify-center mb-4">
+            <div
+              class="flex justify-center mb-4 gap-0.5"
+              aria-label={`Valoración: ${testimonial.rating} de 5 estrellas`}
+            >
               {Array.from({ length: testimonial.rating }).map(() => (
-                <span class="text-primary-500">★</span>
+                <span class="text-primary-500" aria-hidden="true">
+                  ★
+                </span>
               ))}
             </div>
             <p class="text-gray-600 mb-4 italic">"{testimonial.text}"</p>

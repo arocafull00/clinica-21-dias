@@ -1,7 +1,7 @@
 <header
   class="fixed w-full z-50 top-0 bg-white/80 backdrop-blur-sm px-4 md:px-8 lg:px-16 xl:px-32 py-4"
 >
-  <nav class="flex items-center justify-between">
+  <nav class="flex items-center justify-between" aria-label="Principal">
     <a href="/#inicio" class="flex items-center gap-4">
       <img
         src="/flor.png"
@@ -13,7 +13,6 @@
       >
     </a>
 
-    <!-- Enlaces de navegación -->
     <div class="hidden md:flex space-x-8">
       <a
         href="/#inicio"
@@ -45,10 +44,13 @@
       >
     </div>
 
-    <!-- Menú móvil (hamburguesa) -->
     <button
+      type="button"
       id="menu-toggle"
       class="md:hidden text-gray-600 hover:text-gray-900"
+      aria-expanded="false"
+      aria-controls="mobile-menu-panel"
+      aria-label="Abrir menú de navegación"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -56,6 +58,7 @@
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
+        aria-hidden="true"
       >
         <path
           stroke-linecap="round"
@@ -65,17 +68,22 @@
       </svg>
     </button>
 
-    <!-- Menú móvil (panel) -->
     <div
-      id="mobile-menu"
+      id="mobile-menu-panel"
       class="fixed inset-0 invisible opacity-0 md:hidden bg-white/95 backdrop-blur-sm z-50 transition-all duration-300 ease-in-out"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menú principal"
+      inert
     >
       <div
         class="flex flex-col items-center justify-center min-h-screen w-full space-y-8 p-4 bg-white"
       >
         <button
+          type="button"
           id="close-menu"
           class="absolute top-5 right-4 text-gray-600 hover:text-gray-900 p-2"
+          aria-label="Cerrar menú"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -83,6 +91,7 @@
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -123,26 +132,77 @@
 
 <script>
   const menuToggle = document.getElementById("menu-toggle");
-  const closeMenu = document.getElementById("close-menu");
-  const mobileMenu = document.getElementById("mobile-menu");
+  const closeMenuBtn = document.getElementById("close-menu");
+  const mobileMenu = document.getElementById("mobile-menu-panel");
   const mobileMenuLinks = mobileMenu?.querySelectorAll("a");
 
+  let previouslyFocused = null;
+  let menuOpen = false;
+
+  const getFocusableElements = () => {
+    if (!mobileMenu) return [];
+    return [
+      ...mobileMenu.querySelectorAll(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      ),
+    ];
+  };
+
+  const trapTabKey = (e) => {
+    if (e.key !== "Tab" || !menuOpen) return;
+    const focusables = getFocusableElements();
+    if (focusables.length === 0) return;
+    const first = focusables[0];
+    const last = focusables[focusables.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+      return;
+    }
+    if (document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  };
+
+  const onEscape = (e) => {
+    if (e.key === "Escape") closeMenuHandler();
+  };
+
   const openMenu = () => {
-    mobileMenu?.classList.remove("invisible", "opacity-0");
-    mobileMenu?.classList.add("opacity-100");
+    if (!mobileMenu || !menuToggle) return;
+    previouslyFocused = document.activeElement;
+    menuOpen = true;
+    mobileMenu.removeAttribute("inert");
+    mobileMenu.classList.remove("invisible", "opacity-0");
+    mobileMenu.classList.add("opacity-100");
+    document.body.style.overflow = "hidden";
+    menuToggle.setAttribute("aria-expanded", "true");
+    closeMenuBtn?.focus();
+    document.addEventListener("keydown", onEscape);
+    document.addEventListener("keydown", trapTabKey);
   };
 
   const closeMenuHandler = () => {
-    mobileMenu?.classList.remove("opacity-100");
-    mobileMenu?.classList.add("opacity-0");
+    if (!mobileMenu || !menuToggle) return;
+    menuOpen = false;
+    mobileMenu.classList.remove("opacity-100");
+    mobileMenu.classList.add("opacity-0");
+    menuToggle.setAttribute("aria-expanded", "false");
+    document.removeEventListener("keydown", onEscape);
+    document.removeEventListener("keydown", trapTabKey);
     setTimeout(() => {
-      mobileMenu?.classList.add("invisible");
+      mobileMenu.classList.add("invisible");
+      mobileMenu.setAttribute("inert", "");
       document.body.style.overflow = "";
+      if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus();
     }, 300);
   };
 
   menuToggle?.addEventListener("click", openMenu);
-  closeMenu?.addEventListener("click", closeMenuHandler);
+  closeMenuBtn?.addEventListener("click", closeMenuHandler);
 
   mobileMenuLinks?.forEach((link) => {
     link.addEventListener("click", closeMenuHandler);

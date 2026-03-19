@@ -2,14 +2,14 @@
 import Layout from './Layout.astro';
 
 interface Props {
-  title: string;
   service: string;
+  description: string;
 }
 
-const { title, service } = Astro.props;
+const { service, description } = Astro.props;
 ---
-<Layout title={`${service} | Centro de Psicología`}>
-  <main class="container mx-auto px-4 pt-12 flex flex-col items-center justify-center mt-16">
+<Layout title={`${service} | Centro de Psicología`} description={description} ogType="article">
+  <main id="contenido-principal" class="container mx-auto px-4 pt-12 flex flex-col items-center justify-center mt-16">
     <h1 class="text-4xl font-bold text-primary-600 mb-8">{service}</h1>
     <hr class="w-full border-t border-gray-200 mb-6 md:mb-8">
     <div class="prose max-w-none">
@@ -31,4 +31,4 @@ const { title, service } = Astro.props;
       </div>
     </div>
   </main>
-</Layout> 
+</Layout>

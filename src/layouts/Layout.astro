@@ -2,28 +2,68 @@
 import Navbar from '../components/Navbar.astro';
 import Background from '../components/Background.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
-import { ViewTransitions } from 'astro:transitions';
+import LocalBusinessJsonLd from '../components/LocalBusinessJsonLd.astro';
+import ClientRouter from 'astro/components/ClientRouter.astro';
+
 interface Props {
 	title: string;
+	description?: string;
+	ogImage?: string;
+	ogType?: 'website' | 'article';
+	noindex?: boolean;
 }
 
-const { title } = Astro.props;
+const defaultDescription =
+	'21 días - Clínica de Psicología en Torrent. Especialistas en terapia individual, parejas y familiar.';
+
+const {
+	title,
+	description = defaultDescription,
+	ogImage = '/flor.png',
+	ogType = 'website',
+	noindex = false,
+} = Astro.props;
+
+const siteBase = Astro.site ?? new URL(Astro.url.origin);
+const canonicalURL = new URL(Astro.url.pathname, siteBase);
+const ogImageAbsolute = ogImage.startsWith('http')
+	? ogImage
+	: new URL(ogImage.startsWith('/') ? ogImage : `/${ogImage}`, siteBase).href;
 ---
 
 <!doctype html>
 <html lang="es" class="bg-white scroll-smooth font-sans">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="21 días - Clínica de Psicología en Torrent. Especialistas en terapia individual, parejas y familiar." />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/flor.png" />
+		<meta name="description" content={description} />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" type="image/png" href="/flor.png" />
 		<meta name="generator" content={Astro.generator} />
+		{noindex && <meta name="robots" content="noindex, nofollow" />}
+		<link rel="canonical" href={canonicalURL.href} />
 		<title>{title}</title>
-		<ViewTransitions />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalURL.href} />
+		<meta property="og:image" content={ogImageAbsolute} />
+		<meta property="og:locale" content="es_ES" />
+		<meta property="og:type" content={ogType} />
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={ogImageAbsolute} />
+		<ClientRouter />
+		<LocalBusinessJsonLd />
 	</head>
 	<body class="relative">
+		<a
+			href="#contenido-principal"
+			class="fixed left-4 top-0 z-[100] -translate-y-full px-4 py-2 bg-primary-600 text-white rounded-lg shadow-md transition-transform focus:translate-y-4 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
+		>
+			Saltar al contenido
+		</a>
 		<Navbar />
-		<slot/>
+		<slot />
 		<Background />
 		<WhatsAppButton />
 	</body>
