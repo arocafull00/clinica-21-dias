@@ -1,0 +1,18 @@
+---
+import { SITE_NAME, businessId } from '../lib/seo';
+
+const siteBase = Astro.site ?? new URL(Astro.url.origin);
+const siteUrl = siteBase.href.replace(/\/$/, '');
+
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: SITE_NAME,
+	url: siteUrl,
+	publisher: {
+		'@id': businessId(siteBase),
+	},
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

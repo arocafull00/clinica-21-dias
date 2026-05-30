@@ -6,18 +6,20 @@ import Testimonials from '../components/Testimonials.astro';
 import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
 import Gallery from '../components/Gallery.astro';
+import WebSiteJsonLd from '../components/WebSiteJsonLd.astro';
 ---
 
 <Layout
-  title="21 días - Clínica de Psicología en Torrent"
-  description="Clínica de psicología en Torrent: terapia individual, de pareja y familiar, evaluación diagnóstica, logopedia y pedagogía. Clínica 21 Días Psicoeducación."
+	title="Clínica de Psicología en Torrent | 21 Días Psicoeducación"
+	description="Clínica de psicología en Torrent (Valencia): terapia individual, de pareja e infantil, evaluación diagnóstica, logopedia y pedagogía. Reserva tu cita en 21 Días Psicoeducación."
 >
-  <main id="contenido-principal" class="w-full text-[#1a1a1a] px-4 md:px-8 lg:px-16 xl:px-32">
-    <Hero />
-    <Services />
-    <Gallery />
-    <Testimonials />
-    <Contact />
-    <Footer />
-  </main>
+	<WebSiteJsonLd slot="head" />
+	<main id="contenido-principal" class="w-full text-[#1a1a1a] px-4 md:px-8 lg:px-16 xl:px-32">
+		<Hero />
+		<Services />
+		<Gallery />
+		<Testimonials />
+		<Contact />
+		<Footer />
+	</main>
 </Layout>

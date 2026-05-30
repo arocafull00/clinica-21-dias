@@ -1,22 +1,37 @@
 ---
+import { DEFAULT_OG_IMAGE, businessId, MAP_URL } from '../lib/seo';
+
 const siteBase = Astro.site ?? new URL(Astro.url.origin);
 const businessUrl = siteBase.href.replace(/\/$/, '');
 
 const jsonLd = {
 	'@context': 'https://schema.org',
 	'@type': 'MedicalBusiness',
+	'@id': businessId(siteBase),
 	name: 'Clínica 21 Días Psicoeducación',
 	description:
 		'Clínica de psicología en Torrent. Terapia individual, de pareja y familiar, evaluación diagnóstica, logopedia y pedagogía.',
 	url: businessUrl,
 	telephone: '+34640205738',
 	email: 'clinica@21diaspsicoeducacion.es',
-	image: new URL('/flor.png', siteBase).href,
+	image: new URL(DEFAULT_OG_IMAGE, siteBase).href,
+	medicalSpecialty: 'Psychiatric',
+	hasMap: MAP_URL,
+	areaServed: {
+		'@type': 'City',
+		name: 'Torrent',
+	},
+	geo: {
+		'@type': 'GeoCoordinates',
+		latitude: 39.437,
+		longitude: -0.465,
+	},
 	address: {
 		'@type': 'PostalAddress',
 		streetAddress: 'Calle San Valeriano 20A',
 		addressLocality: 'Torrent',
 		addressRegion: 'Valencia',
+		postalCode: '46900',
 		addressCountry: 'ES',
 	},
 	openingHoursSpecification: [

@@ -1,34 +1,41 @@
 ---
 import Layout from './Layout.astro';
+import ServiceJsonLd from '../components/ServiceJsonLd.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_NAME } from '../lib/seo';
 
 interface Props {
-  service: string;
-  description: string;
+	service: string;
+	description: string;
+	ogImage?: string;
 }
 
-const { service, description } = Astro.props;
+const { service, description, ogImage } = Astro.props;
+const pageTitle = `${service} en Torrent | ${SITE_NAME}`;
 ---
-<Layout title={`${service} | Centro de Psicología`} description={description} ogType="article">
-  <main id="contenido-principal" class="container mx-auto px-4 pt-12 flex flex-col items-center justify-center mt-16">
-    <h1 class="text-4xl font-bold text-primary-600 mb-8">{service}</h1>
-    <hr class="w-full border-t border-gray-200 mb-6 md:mb-8">
-    <div class="prose max-w-none">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-10">
-        <slot />
-      </div>
-      <div class="bg-primary-50 p-6 rounded-lg mt-8">
-        <h2 class="text-2xl text-center md:text-left font-semibold text-gray-800 mb-4">¿Necesitas ayuda?</h2>
-        <p class="text-center md:text-left mb-4">
-          Contacta con nosotros para programar una consulta inicial y comenzar tu proceso terapéutico.
-        </p>
-        <a
-          href="/#contacto"
-          class="inline-block text-center w-full md:w-fit bg-primary-500 text-white px-6 py-2 rounded-lg hover:bg-primary-600 transition-colors"
-        >
-          Contactar
 
-        </a>
-      </div>
-    </div>
-  </main>
+<Layout title={pageTitle} description={description} ogImage={ogImage}>
+	<ServiceJsonLd slot="head" name={service} description={description} />
+	<main id="contenido-principal" class="container mx-auto px-4 pt-12 flex flex-col items-center justify-center mt-16">
+		<h1 class="text-4xl font-bold text-primary-600 mb-8">{service}</h1>
+		<hr class="w-full border-t border-gray-200 mb-6 md:mb-8">
+		<div class="prose max-w-none">
+			<div class="flex flex-col md:flex-row items-center justify-between gap-10">
+				<slot />
+			</div>
+			<div class="bg-primary-50 p-6 rounded-lg mt-8">
+				<h2 class="text-2xl text-center md:text-left font-semibold text-gray-800 mb-4">¿Necesitas ayuda?</h2>
+				<p class="text-center md:text-left mb-4">
+					Contacta con nosotros para programar una consulta inicial y comenzar tu proceso terapéutico.
+				</p>
+				<a
+					href="/#contacto"
+					class="inline-block text-center w-full md:w-fit bg-primary-500 text-white px-6 py-2 rounded-lg hover:bg-primary-600 transition-colors"
+				>
+					Contactar
+				</a>
+			</div>
+		</div>
+	</main>
+	<Footer />
 </Layout>
