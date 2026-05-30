@@ -1,57 +1,92 @@
 ---
-import { Image } from "astro:assets";
+import GalleryItem from './GalleryItem.astro';
+import img1 from '../assets/clinica/1.jpeg';
+import img2 from '../assets/clinica/2.jpeg';
+import img3 from '../assets/clinica/3.jpeg';
+import img4 from '../assets/clinica/4.jpeg';
+import img5 from '../assets/clinica/5.jpeg';
+import img6 from '../assets/clinica/6.jpeg';
+import img7 from '../assets/clinica/7.jpeg';
+
+type GalleryVariant = 'hero' | 'wide' | 'default';
 
 const images = [
-  {
-    src: "/clinica/2.jpeg",
-    alt: "Sala de terapia principal",
-    title: "Espacio de terapia grupal",
-  },
-  {
-    src: "/clinica/3.jpeg",
-    alt: "Sala de espera",
-    title: "Área de recepción",
-  },
-  {
-    src: "/clinica/1.jpeg",
-    alt: "Consultorio individual",
-    title: "Sala de terapia",
-  },
-  {
-    src: "/clinica/4.jpeg",
-    alt: "Área de terapia grupal",
-    title: "Entrada principal",
-  },
+	{
+		src: img2,
+		alt: 'Sala de terapia con mesa y sillas',
+		title: 'Sala de terapia grupal',
+	},
+	{
+		src: img4,
+		alt: 'Mostrador de recepción blanco con lámparas',
+		title: 'Recepción',
+	},
+	{
+		src: img3,
+		alt: 'Área de recepción con pasillo y armarios',
+		title: 'Recepción',
+	},
+	{
+		src: img7,
+		alt: 'Espacio de trabajo con mesa redonda y escritorio',
+		title: 'Terapias infantiles',
+	},
+	{
+		src: img5,
+		alt: 'Sala circular con mesa verde y alfombra artística',
+		title: 'Sala de terapia',
+	},
+	{
+		src: img1,
+		alt: 'Consultorio con escritorio y sillas tapizadas',
+		title: 'Sala de terapia',
+	},
+	{
+		src: img6,
+		alt: 'Sala de logopedia con camilla y decoración lúdica',
+		title: 'Sala de logopedia',
+	},
 ];
+
+function getVariant(index: number): GalleryVariant {
+	if (index === 0) return 'hero';
+	if (index === 3 || index === 6) return 'wide';
+	return 'default';
+}
 ---
 
 <section class="py-20 bg-gray-50" id="nuestras-instalaciones">
-  <div class="container mx-auto px-4">
-    <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-8">
-      Nuestras <span class="text-primary-500">Instalaciones</span>
-    </h2>
-    <p class="text-center text-gray-600 mb-12 max-w-2xl mx-auto">
-      Conoce nuestros espacios diseñados para brindarte la mayor comodidad y
-      privacidad durante tu proceso terapéutico.
-    </p>
+	<div class="container mx-auto px-4">
+		<h2 class="text-4xl font-bold text-center mb-4" data-reveal>
+			Nuestras{' '}
+			<span class="bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent relative">
+				Instalaciones
+				<span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary-600 to-primary-400 rounded-full"></span>
+			</span>
+		</h2>
+		<p
+			class="text-center text-secondary-500 mb-12 max-w-2xl mx-auto mt-8"
+			data-reveal
+			style="--i: 1"
+		>
+			Conoce nuestros espacios diseñados para brindarte la mayor comodidad y
+			privacidad durante tu proceso terapéutico.
+		</p>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-      {
-        images.map((image) => (
-          <figure class="flex flex-col overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <Image
-              height={300}
-              width={300}
-              src={image.src}
-              alt={`${image.title}. ${image.alt}`}
-              class="object-cover w-full"
-            />
-            <figcaption class="bg-gray-100 px-3 py-3 text-center border-t border-gray-200">
-              <span class="text-lg font-semibold text-gray-800">{image.title}</span>
-            </figcaption>
-          </figure>
-        ))
-      }
-    </div>
-  </div>
+		<div
+			class="mx-auto grid max-w-6xl grid-cols-2 gap-3 auto-rows-[minmax(11rem,auto)] md:grid-cols-4 md:gap-4 md:auto-rows-[minmax(12rem,auto)]"
+		>
+			{
+				images.map((image, index) => (
+					<GalleryItem
+						src={image.src}
+						alt={image.alt}
+						title={image.title}
+						index={index}
+						variant={getVariant(index)}
+					/>
+				))
+			}
+		</div>
+	</div>
 </section>

@@ -1,38 +1,33 @@
 ---
-import { Image } from "astro:assets";
-
-
+import HeroBackground from './HeroBackground.astro';
 ---
 
-<section class="relative pt-32" id="inicio">
-  <div class="mx-auto">
-    <div class="grid md:grid-cols-2 gap-12 items-center">
-      <div class="text-left">
-        <h1 class="text-5xl text-center md:text-left md:text-6xl font-bold text-primary-500 mb-6 leading-tight">
-          Clínica 21 Días Psicoeducación
-        </h1>
-        <p class="text-xl text-center md:text-left text-secondary-500 mb-10 leading-relaxed max-w-xl">
-          Tu bienestar emocional es nuestra prioridad en Torrent (Valencia).
-          Descubre un espacio seguro donde encontrarás apoyo profesional y
-          comprensión para tu desarrollo personal.
-        </p>
-        <a
-          href="#contacto"
-          class="inline-block w-full text-center md:text-left md:w-fit text-white bg-primary-500 px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary-600 transition-colors shadow-md"
-        >
-          Pide tu cita
-        </a>
-
-      </div>
-      <div class="relative">
-        <Image
-          width={450}
-          height={450}
-          src="/svg/familia.svg"
-          alt="Ilustración de bienestar emocional"
-          class="mx-auto w-1/2 md:w-1/2"
-        />
-      </div>
-    </div>
+<section
+  id="inicio"
+  class="relative overflow-hidden -mx-4 md:-mx-8 lg:-mx-16 xl:-mx-32 px-4 md:px-8 lg:px-16 xl:px-32 min-h-screen flex flex-col items-center justify-center"
+>
+  <HeroBackground />
+  <div class="hero-enter relative mx-auto max-w-3xl text-center">
+    <h1
+      class="text-5xl md:text-6xl font-bold text-primary-500 mb-6 leading-tight"
+      style="--i: 0"
+    >
+      Clínica 21 Días Psicoeducación
+    </h1>
+    <p
+      class="text-xl text-secondary-500 mb-10 leading-relaxed mx-auto max-w-2xl"
+      style="--i: 1"
+    >
+      Tu bienestar emocional es nuestra prioridad en Torrent (Valencia).
+      Descubre un espacio seguro donde encontrarás apoyo profesional y
+      comprensión para tu desarrollo personal.
+    </p>
+    <a
+      href="#contacto"
+      class="btn-press inline-block text-white bg-primary-500 px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary-600 shadow-md"
+      style="--i: 2"
+    >
+      Pide tu cita
+    </a>
   </div>
 </section>

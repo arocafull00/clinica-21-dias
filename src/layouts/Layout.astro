@@ -1,7 +1,9 @@
 ---
+import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
 import Background from '../components/Background.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+import RevealObserver from '../components/RevealObserver.astro';
 import LocalBusinessJsonLd from '../components/LocalBusinessJsonLd.astro';
 import ClientRouter from 'astro/components/ClientRouter.astro';
 import {
@@ -93,5 +95,6 @@ const useDefaultOgDimensions = ogImage === DEFAULT_OG_IMAGE || ogImage.endsWith(
 		<slot />
 		<Background />
 		<WhatsAppButton />
+		<RevealObserver />
 	</body>
 </html>

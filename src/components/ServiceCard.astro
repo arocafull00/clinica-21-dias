@@ -1,28 +1,115 @@
 ---
+import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
+
+type ServiceVariant = 'featured' | 'wide' | 'default';
+
 interface Props {
-  emoji: string;
-  title: string;
-  description: string;
-  url: string;
+	icon: AstroComponentFactory;
+	title: string;
+	description: string;
+	url: string;
+	index: number;
+	variant: ServiceVariant;
 }
 
-const { emoji, title, description, url } = Astro.props;
+const { icon: Icon, title, description, url, index, variant } = Astro.props;
+
+const iconSize = variant === 'featured' ? 48 : variant === 'wide' ? 40 : 32;
+
+const layoutClasses: Record<ServiceVariant, string> = {
+	featured:
+		'md:col-span-2 lg:col-span-2 lg:row-span-2 flex-col p-8 bg-gradient-to-br from-primary-50/90 via-white to-white min-h-[240px]',
+	wide: 'md:col-span-2 flex-col md:flex-row md:items-center gap-5 md:gap-8 p-6 md:p-7',
+	default: 'flex-col p-6',
+};
+
+const iconWrapClasses: Record<ServiceVariant, string> = {
+	featured: 'mb-6 h-16 w-16 rounded-2xl bg-primary-100/70',
+	wide: 'shrink-0 h-14 w-14 rounded-xl bg-primary-50 md:mb-0 mb-4',
+	default: 'mb-4 h-12 w-12 rounded-xl bg-primary-50',
+};
+
+const titleClasses: Record<ServiceVariant, string> = {
+	featured: 'text-2xl lg:text-3xl mb-4',
+	wide: 'text-xl md:text-2xl mb-2 md:mb-3',
+	default: 'text-lg mb-2',
+};
+
+const descriptionClasses: Record<ServiceVariant, string> = {
+	featured: 'text-base lg:text-lg leading-relaxed flex-1',
+	wide: 'text-sm md:text-base leading-relaxed',
+	default: 'text-sm leading-relaxed line-clamp-4',
+};
 ---
 
 <a
-  href={url}
-  class="border border-primary-300 p-6 rounded-lg text-center hover:shadow-lg transition-all duration-300 flex-grow basis-full md:basis-[calc(33.333%-1.33rem)] lg:basis-[calc(25%-1.5rem)] cursor-pointer group"
+	href={url}
+	data-reveal
+	style={`--i: ${index}`}
+	class:list={[
+		'card-lift group relative flex h-full cursor-pointer overflow-hidden rounded-2xl border border-primary-200/70 bg-white text-left hover:border-primary-300 hover:shadow-lg',
+		layoutClasses[variant],
+	]}
 >
-  <span
-    class="text-4xl mb-4 block transform transition-transform duration-300 group-hover:scale-110"
-    aria-hidden="true">{emoji}</span>
+	<span
+		class:list={[
+			'flex items-center justify-center text-primary-500 transition-transform duration-300 group-hover:scale-110',
+			iconWrapClasses[variant],
+		]}
+		aria-hidden="true"
+	>
+		<Icon size={iconSize} stroke-width={1.5} />
+	</span>
 
-  <h3 class="text-xl font-semibold mb-3 bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent">
-    {title}
-  </h3>
-  <p class="text-center md:text-left text-gray-600">
-    {description}
+	{
+		variant === 'wide' ? (
+			<div class="flex min-w-0 flex-1 flex-col">
+				<h3
+					class:list={[
+						'font-semibold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent',
+						titleClasses[variant],
+					]}
+				>
+					{title}
+				</h3>
+				<p class:list={['text-secondary-500', descriptionClasses[variant]]}>
+					{description}
+				</p>
+			</div>
+		) : (
+			<>
+				<h3
+					class:list={[
+						'font-semibold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent',
+						titleClasses[variant],
+					]}
+				>
+					{title}
+				</h3>
+				<p class:list={['text-secondary-500', descriptionClasses[variant]]}>
+					{description}
+				</p>
+			</>
+		)
+	}
 
-  </p>
+	<span
+		class="pointer-events-none absolute bottom-5 right-5 text-primary-400 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 translate-x-1"
+		aria-hidden="true"
+	>
+		<svg
+			xmlns="http://www.w3.org/2000/svg"
+			width="20"
+			height="20"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+		>
+			<path d="M5 12h14"></path>
+			<path d="m12 5 7 7-7 7"></path>
+		</svg>
+	</span>
 </a>
-

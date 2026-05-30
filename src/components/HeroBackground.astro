@@ -1,0 +1,75 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+
+const svgPath = path.join(process.cwd(), 'public/images/background.svg');
+const svgRaw = fs.readFileSync(svgPath, 'utf-8');
+const svgMarkup = svgRaw
+	.replace(/<\?xml[^?]*\?\>\s*/i, '')
+	.replace(
+		'<svg ',
+		'<svg class="hero-bg-svg" preserveAspectRatio="xMidYMid slice" ',
+	);
+---
+
+<div
+	class="hero-bg pointer-events-none absolute inset-0 h-full w-full"
+	aria-hidden="true"
+	set:html={svgMarkup}
+/>
+
+<script>
+	const initHeroBgDraw = () => {
+		const svg = document.querySelector('.hero-bg-svg');
+		if (!svg) return;
+
+		const reducedMotion = window.matchMedia(
+			'(prefers-reduced-motion: reduce)',
+		).matches;
+
+		const strokePaths = svg.querySelectorAll(
+			'path[stroke]',
+		) as NodeListOf<SVGPathElement>;
+		const fillPaths = svg.querySelectorAll(
+			'path[fill]:not([stroke])',
+		) as NodeListOf<SVGPathElement>;
+
+		if (reducedMotion) {
+			strokePaths.forEach((path) => {
+				path.style.strokeDashoffset = '0';
+			});
+			fillPaths.forEach((path) => {
+				path.style.opacity = '1';
+			});
+			return;
+		}
+
+		let maxLength = 0;
+		const lengths = [];
+
+		strokePaths.forEach((path) => {
+			const length = path.getTotalLength();
+			lengths.push(length);
+			if (length > maxLength) maxLength = length;
+		});
+
+		const drawDuration = 2.4;
+		strokePaths.forEach((path, index) => {
+			const length = lengths[index];
+			path.style.strokeDasharray = String(length);
+			path.style.strokeDashoffset = String(length);
+			const duration = maxLength > 0 ? (length / maxLength) * drawDuration : drawDuration;
+			const delay = index * 0.018;
+			path.style.animation = `hero-draw-stroke ${duration}s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s forwards`;
+		});
+
+		fillPaths.forEach((path, index) => {
+			path.style.opacity = '0';
+			const delay = 0.15 + index * 0.004;
+			path.style.animation = `hero-fill-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s forwards`;
+		});
+	};
+
+	initHeroBgDraw();
+	document.addEventListener('astro:page-load', initHeroBgDraw);
+</script>

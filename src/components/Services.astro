@@ -1,28 +1,40 @@
 ---
 import ServiceCard from './ServiceCard.astro';
 import { services } from '../data/services';
+
+type ServiceVariant = 'featured' | 'wide' | 'default';
+
+function getVariant(index: number): ServiceVariant {
+	if (index === 0) return 'featured';
+	if (index === 3 || index === 6) return 'wide';
+	return 'default';
+}
 ---
 
 <section class="py-20" id="nuestros-servicios">
-  <div class="mx-auto">
-    <h2 class="text-4xl font-bold text-center mb-12">
-      Nuestros{" "}
-      <span class="bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent relative">
-        Servicios
-        <span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary-600 to-primary-400 rounded-full"></span>
-      </span>
-    </h2>
-    <div class="flex flex-wrap justify-center gap-8">
-      {
-        services.map((service) => (
-          <ServiceCard
-            emoji={service.emoji}
-            title={service.title}
-            description={service.description}
-            url={service.url}
-          />
-        ))
-      }
-    </div>
-  </div>
+	<div class="mx-auto">
+		<h2 class="text-4xl font-bold text-center mb-12" data-reveal>
+			Nuestros{' '}
+			<span class="bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent relative">
+				Servicios
+				<span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary-600 to-primary-400 rounded-full"></span>
+			</span>
+		</h2>
+		<div
+			class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5 auto-rows-[minmax(11rem,auto)]"
+		>
+			{
+				services.map((service, index) => (
+					<ServiceCard
+						icon={service.icon}
+						title={service.title}
+						description={service.description}
+						url={service.url}
+						index={index}
+						variant={getVariant(index)}
+					/>
+				))
+			}
+		</div>
+	</div>
 </section>
