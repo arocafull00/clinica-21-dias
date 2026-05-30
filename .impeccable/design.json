@@ -1,0 +1,281 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-05-30T00:00:00.000Z",
+  "title": "Design System: Clínica 21 Días Psicoeducación",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Torrent Teal",
+        "canonical": "oklch(48% 0.09 220)",
+        "tonalRamp": [
+          "oklch(18% 0.04 200)",
+          "oklch(28% 0.06 205)",
+          "oklch(35% 0.07 210)",
+          "oklch(42% 0.08 215)",
+          "oklch(48% 0.09 220)",
+          "oklch(55% 0.08 215)",
+          "oklch(65% 0.07 200)",
+          "oklch(92% 0.03 195)",
+          "oklch(96% 0.02 190)"
+        ]
+      },
+      "primary-deep": {
+        "role": "primary",
+        "displayName": "Deep Clinic Teal",
+        "canonical": "oklch(35% 0.07 230)",
+        "tonalRamp": [
+          "oklch(15% 0.04 230)",
+          "oklch(22% 0.05 230)",
+          "oklch(28% 0.06 230)",
+          "oklch(35% 0.07 230)",
+          "oklch(42% 0.07 225)",
+          "oklch(50% 0.06 220)",
+          "oklch(60% 0.05 215)",
+          "oklch(75% 0.03 210)",
+          "oklch(90% 0.02 200)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Strong Ink",
+        "canonical": "oklch(18% 0 0)",
+        "tonalRamp": [
+          "oklch(10% 0 0)",
+          "oklch(18% 0 0)",
+          "oklch(28% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(48% 0 0)",
+          "oklch(58% 0 0)",
+          "oklch(68% 0 0)",
+          "oklch(85% 0 0)",
+          "oklch(96% 0 0)"
+        ]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Neutral Ink",
+        "canonical": "oklch(48% 0 0)",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(25% 0 0)",
+          "oklch(35% 0 0)",
+          "oklch(42% 0 0)",
+          "oklch(48% 0 0)",
+          "oklch(55% 0 0)",
+          "oklch(65% 0 0)",
+          "oklch(80% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "surface": {
+        "role": "neutral",
+        "displayName": "Clinic White",
+        "canonical": "oklch(100% 0 0)",
+        "tonalRamp": [
+          "oklch(20% 0.02 200)",
+          "oklch(35% 0.03 200)",
+          "oklch(50% 0.03 195)",
+          "oklch(65% 0.02 195)",
+          "oklch(80% 0.015 195)",
+          "oklch(90% 0.01 195)",
+          "oklch(95% 0.008 195)",
+          "oklch(98% 0.005 195)",
+          "oklch(100% 0 0)"
+        ]
+      },
+      "whatsapp": {
+        "role": "tertiary",
+        "displayName": "WhatsApp Green",
+        "canonical": "oklch(65% 0.19 145)",
+        "tonalRamp": [
+          "oklch(25% 0.08 145)",
+          "oklch(35% 0.12 145)",
+          "oklch(45% 0.15 145)",
+          "oklch(55% 0.17 145)",
+          "oklch(65% 0.19 145)",
+          "oklch(72% 0.17 145)",
+          "oklch(80% 0.14 145)",
+          "oklch(90% 0.08 145)",
+          "oklch(96% 0.04 145)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Hero H1 only. Primary teal, bold, balanced wrap."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section H2 across homepage and inner pages."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Card titles, contact subheads, service page section headers."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Prose, descriptions, contact rows. Max ~65ch in long blocks."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Footer links, captions, metadata."
+      }
+    },
+    "shadows": [
+      {
+        "name": "cta",
+        "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+        "purpose": "Hero primary button at rest."
+      },
+      {
+        "name": "card",
+        "value": "0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)",
+        "purpose": "Testimonial cards at rest."
+      },
+      {
+        "name": "card-hover",
+        "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+        "purpose": "Service cards and gallery on hover."
+      },
+      {
+        "name": "fab",
+        "value": "0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1)",
+        "purpose": "WhatsApp floating action button."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "cubic-bezier(0.4, 0, 0.2, 1)",
+        "purpose": "Default color and shadow transitions (300ms)."
+      },
+      {
+        "name": "ease-out-smooth",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Nav underline reveal and menu fade."
+      }
+    ],
+    "breakpoints": [
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button (Hero)",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Main homepage CTA. Pill shape, teal fill, white label.",
+      "html": "<a href=\"#contacto\" class=\"ds-btn-primary\">Pide tu cita</a>",
+      "css": ".ds-btn-primary { display: inline-block; background: #007494; color: #ffffff; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 1.125rem; font-weight: 600; padding: 16px 32px; border-radius: 9999px; text-decoration: none; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-primary:hover { background: #034b70; } .ds-btn-primary:focus-visible { outline: 2px solid #034b70; outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Service page and inline CTAs. Rounded rectangle.",
+      "html": "<a href=\"/#contacto\" class=\"ds-btn-secondary\">Contactar</a>",
+      "css": ".ds-btn-secondary { display: inline-block; background: #007494; color: #ffffff; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 1rem; font-weight: 600; padding: 8px 24px; border-radius: 8px; text-decoration: none; transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1); } .ds-btn-secondary:hover { background: #034b70; } .ds-btn-secondary:focus-visible { outline: 2px solid #034b70; outline-offset: 2px; }"
+    },
+    {
+      "name": "Service Card",
+      "kind": "card",
+      "refersTo": "card-service",
+      "description": "Linked service tile with emoji, title, and description.",
+      "html": "<a href=\"/servicios/psicologia-infantil\" class=\"ds-service-card\"><span class=\"ds-service-card__emoji\" aria-hidden=\"true\">🧒</span><h3 class=\"ds-service-card__title\">Psicología infantil</h3><p class=\"ds-service-card__desc\">Evaluación y apoyo emocional para niños y adolescentes.</p></a>",
+      "css": ".ds-service-card { display: block; background: #ffffff; border: 1px solid #01598b; border-radius: 8px; padding: 24px; text-align: center; text-decoration: none; color: #666666; transition: box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1); } .ds-service-card:hover { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); } .ds-service-card:focus-visible { outline: 2px solid #034b70; outline-offset: 2px; } .ds-service-card__emoji { display: block; font-size: 2.25rem; margin-bottom: 16px; } .ds-service-card__title { font-family: ui-sans-serif, system-ui, sans-serif; font-size: 1.25rem; font-weight: 600; color: #034b70; margin: 0 0 12px; } .ds-service-card__desc { font-size: 1rem; line-height: 1.5; margin: 0; color: #666666; }"
+    },
+    {
+      "name": "Testimonial Card",
+      "kind": "card",
+      "description": "Patient quote with star rating on white surface.",
+      "html": "<article class=\"ds-testimonial\"><div class=\"ds-testimonial__stars\" aria-label=\"Valoración: 5 de 5 estrellas\"><span aria-hidden=\"true\">★★★★★</span></div><p class=\"ds-testimonial__quote\">\"La atención ha sido excepcional. Profesionalidad y cercanía.\"</p><p class=\"ds-testimonial__author\">- María G.</p></article>",
+      "css": ".ds-testimonial { background: #ffffff; border-radius: 8px; padding: 24px; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); } .ds-testimonial__stars { color: #007494; text-align: center; margin-bottom: 16px; letter-spacing: 2px; } .ds-testimonial__quote { color: #666666; font-style: italic; line-height: 1.625; margin: 0 0 16px; } .ds-testimonial__author { color: #1a1a1a; font-weight: 600; text-align: right; margin: 0; }"
+    },
+    {
+      "name": "Navigation Link",
+      "kind": "nav",
+      "description": "Desktop nav item with underline reveal on hover.",
+      "html": "<a href=\"/#contacto\" class=\"ds-nav-link\">Contacto</a>",
+      "css": ".ds-nav-link { position: relative; display: inline-block; font-family: ui-sans-serif, system-ui, sans-serif; font-size: 1.25rem; color: #666666; text-decoration: none; transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1); } .ds-nav-link::after { content: \"\"; position: absolute; left: 0; bottom: 0; width: 100%; height: 2px; background: #034b70; transform: scaleX(0); transform-origin: right; transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); } .ds-nav-link:hover { color: #1a1a1a; } .ds-nav-link:hover::after { transform: scaleX(1); transform-origin: left; } .ds-nav-link:focus-visible { outline: 2px solid #034b70; outline-offset: 4px; }"
+    },
+    {
+      "name": "WhatsApp FAB",
+      "kind": "custom",
+      "description": "Fixed contact shortcut. Channel green, not brand teal.",
+      "html": "<a href=\"https://wa.me/34640205738\" class=\"ds-whatsapp-fab\" aria-label=\"Contactar por WhatsApp\"><svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" fill=\"currentColor\" viewBox=\"0 0 24 24\" aria-hidden=\"true\"><path d=\"M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z\"/></svg></a>",
+      "css": ".ds-whatsapp-fab { position: fixed; bottom: 24px; right: 24px; display: flex; align-items: center; justify-content: center; width: 56px; height: 56px; background: #22c55e; color: #ffffff; border-radius: 9999px; box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1); transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1); text-decoration: none; z-index: 50; } .ds-whatsapp-fab:hover { background: #16a34a; } .ds-whatsapp-fab:focus-visible { outline: 2px solid #15803d; outline-offset: 2px; }"
+    },
+    {
+      "name": "Skip Link",
+      "kind": "custom",
+      "description": "Keyboard skip to main content. Hidden until focused.",
+      "html": "<a href=\"#contenido-principal\" class=\"ds-skip-link\">Saltar al contenido</a>",
+      "css": ".ds-skip-link { position: fixed; top: 0; left: 16px; z-index: 100; transform: translateY(-100%); padding: 8px 16px; background: #034b70; color: #ffffff; border-radius: 8px; font-family: ui-sans-serif, system-ui, sans-serif; font-weight: 600; text-decoration: none; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1); transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1); } .ds-skip-link:focus { transform: translateY(16px); outline: 2px solid #99f7ef; outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "El Consultorio Luminoso",
+    "overview": "The visual system reads like a well-lit consultation room: white surfaces, generous air, and teal used as a calm guide through the page. Warmth comes from approachable shapes, real clinic photography, and human copy, not from cream backgrounds or decorative gradients. The site should feel local and trustworthy to someone in Torrent comparing clinics, never like a templated healthcare SaaS landing page.\n\nDensity stays moderate. Sections breathe with consistent vertical rhythm (py-20). The primary teal appears on headings, links, CTAs, and accent words, while body copy stays in readable gray ink on white or very light teal tints. Proof (services, facilities, testimonials) precedes contact; visual hierarchy supports that sequence.",
+    "keyCharacteristics": [
+      "Bright white base with soft teal atmospheric glow, not warm sand or paper tones",
+      "System sans-serif throughout; hierarchy via size and weight, not font pairing",
+      "Hybrid elevation: flat section rhythm, lift on cards and images at rest or hover",
+      "Approachable components: pill primary CTA, rounded cards, underline-reveal navigation",
+      "Real clinic imagery and SVG illustrations; no stock wellness clichés",
+      "Explicit rejection of gradient text, SaaS hero patterns, and identical icon-card grids"
+    ],
+    "rules": [
+      {
+        "name": "The One Teal Voice Rule",
+        "body": "Teal carries identity on headings, links, CTAs, and small accent spans. It does not flood large surfaces except intentional tint bands (testimonials, callout boxes). Rarity preserves trust; saturation everywhere reads as marketing template.",
+        "section": "colors"
+      },
+      {
+        "name": "The No-Cream Rule",
+        "body": "Body backgrounds stay true white or neutral gray. Warm sand, parchment, or beige tints are prohibited; warmth is carried by photography, copy tone, and teal accent, not page color.",
+        "section": "colors"
+      },
+      {
+        "name": "The System Sans Rule",
+        "body": "One sans family for all roles until a deliberate pairing is chosen. Do not add Inter, DM Sans, or other reflex fonts without explicit brand reason.",
+        "section": "typography"
+      },
+      {
+        "name": "The Solid Headline Rule",
+        "body": "Section and card titles use solid primary or ink colors. Gradient text (background-clip: text) is prohibited; it reads as generic SaaS decoration and fails PRODUCT.md anti-references.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-Until-Interactive Rule",
+        "body": "Default section layout has no shadow. Shadows appear on CTAs, cards, gallery images, and the WhatsApp FAB. Do not pair 1px borders with wide soft shadows on the same element.",
+        "section": "elevation"
+      },
+      {
+        "name": "The Blur-Once Rule",
+        "body": "Backdrop blur appears on the sticky navbar (bg-white/80 backdrop-blur-sm) and mobile menu overlay only. Decorative glass cards elsewhere are prohibited.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do keep page backgrounds true white or neutral gray-50; use primary-50/100 only for intentional section bands.",
+      "Do use Torrent Teal (#007494) for headings, links, CTAs, and small accent words; keep it under ~30% of any viewport.",
+      "Do show real clinic photography in the gallery and service contexts; imagery builds trust before contact.",
+      "Do use pill CTAs for the primary homepage action and rounded-lg for secondary actions on inner pages.",
+      "Do provide visible focus rings (2px primary-400) and meaningful Spanish link text (\"Pide tu cita\", not \"Click aquí\").",
+      "Do respect prefers-reduced-motion on any transition or hover scale (service card emoji scale, menu fade)."
+    ],
+    "donts": [
+      "Don't use generic SaaS landing page patterns: cream or sand backgrounds, gradient text, startup hero metrics, identical icon-card grids, or templated marketing copy (per PRODUCT.md anti-references).",
+      "Don't apply background-clip: text with gradients on headings or card titles; use solid primary or ink.",
+      "Don't pair 1px borders with wide soft drop shadows on the same card or button.",
+      "Don't use purple accent (#8b5cf6) from the Tailwind config; it is not part of the live brand palette.",
+      "Don't add tiny uppercase tracked eyebrows above every section or numbered 01/02/03 scaffolding unless the section is a real sequence.",
+      "Don't use glassmorphism, diagonal stripe backgrounds, or decorative blur cards beyond the single navbar/menu and background orb.",
+      "Don't let body text fall below #666666 on white; lighter grays wash out and fail the warm-professional readability bar."
+    ]
+  }
+}
