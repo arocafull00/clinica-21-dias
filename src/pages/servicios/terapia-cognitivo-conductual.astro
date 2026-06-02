@@ -1,51 +1,291 @@
 ---
 import Layout from "../../layouts/ServiceLayout.astro";
-import {Image} from "astro:assets";
+import { Image } from "astro:assets";
 ---
 
 <Layout
-  service="Terapia Cognitivo-Conductual"
-  description="Terapia cognitivo-conductual en Torrent basada en evidencia científica. Identificación y cambio de pensamientos, emociones y conductas. Clínica 21 Días."
+  service="Evaluación diagnóstica completa"
+  description="Evaluación diagnóstica completa en Torrent para niños, adolescentes y adultos. Enfoque diferencial, equipo multidisciplinar e informe clínico con validez sanitaria. Clínica 21 Días."
 >
-    <div class="w-full md:w-1/2">
-      <h2 class="text-2xl font-semibold text-gray-800 mb-4">
-        ¿Qué es la Terapia Cognitivo-Conductual?
-      </h2>
+  <div class="w-full md:w-1/2">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+      ¿Qué es nuestra evaluación?
+    </h2>
+    <p class="mb-4">
+      La evaluación diagnóstica es un proceso clínico especializado cuyo objetivo
+      es comprender de manera global y precisa el funcionamiento del paciente
+      (niño, adolescente o adulto).
+    </p>
+    <p class="mb-4">
+      No se trata únicamente de administrar pruebas, sino de realizar un estudio
+      clínico completo, en el que se analizan e integran diferentes áreas del
+      desarrollo y del funcionamiento psicológico. Este proceso permite identificar
+      con rigor:
+    </p>
+    <ul class="list-disc pl-6 mb-4">
+      <li>Las dificultades presentes</li>
+      <li>Las fortalezas del paciente</li>
+      <li>Sus necesidades reales</li>
+      <li>
+        Su forma de desenvolverse en distintos contextos (familiar, escolar y
+        social)
+      </li>
+    </ul>
+    <p class="mb-4">
+      A partir de este proceso se puede elaborar un informe diagnóstico, que
+      recoge no sólo los resultados obtenidos, sino su interpretación clínica, una
+      posible orientación diagnóstica (cuando procede) y recomendaciones
+      específicas adaptadas al caso.
+    </p>
 
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Enfoque diferencial</h2>
+    <p class="mb-4">
+      No utilizamos protocolos cerrados ni aplicamos las mismas pruebas a todos
+      los pacientes. La evaluación se va ajustando progresivamente en función de
+      los resultados que se obtienen, lo que permite afinar el diagnóstico y
+      evitar conclusiones simplificadas o incompletas.
+    </p>
 
-      <p class="mb-4">
-        La Terapia Cognitivo-Conductual es un enfoque basado en la evidencia
-        científica que ayuda a identificar y modificar pensamientos, emociones y
-        conductas disfuncionales.
-      </p>
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+      Trabajo multidisciplinar
+    </h2>
+    <p class="mb-4">
+      La evaluación es realizada de forma coordinada por un equipo de
+      profesionales que trabajan conjuntamente, integrando distintas perspectivas
+      clínicas. Esto permite una visión más completa, rigurosa y coherente del
+      caso. Además, al tratarse de un centro sanitario autorizado y contar con
+      profesionales del ámbito de la psicología clínica, el informe resultante
+      tiene carácter clínico y diagnóstico, lo que le confiere validez dentro del
+      ámbito sanitario.
+    </p>
 
-      <h2 class="text-2xl font-semibold text-gray-800 mb-4">¿Cómo funciona?</h2>
-      <p class="mb-4">
-        Se centra en el presente y en dotar al paciente de herramientas
-        prácticas para afrontar sus dificultades. El terapeuta trabaja en
-        colaboración con el paciente para identificar patrones de pensamiento
-        negativos y desarrollar estrategias de afrontamiento más adaptativas.
-      </p>
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+      Áreas que evaluamos
+    </h2>
+    <p class="mb-4">
+      La evaluación abarca distintas áreas del funcionamiento con el objetivo de
+      obtener una visión global y precisa del perfil del paciente. Entre ellas se
+      incluyen:
+    </p>
+    <ul class="list-disc pl-6 mb-4">
+      <li>
+        Funcionamiento cognitivo: capacidad intelectual general, razonamiento y
+        habilidades cognitivas específicas
+      </li>
+      <li>
+        Atención y funciones ejecutivas: procesos relacionados con la
+        concentración, la planificación, la inhibición, la flexibilidad cognitiva
+        y el control de la conducta
+      </li>
+      <li>
+        Lenguaje y comunicación: comprensión, expresión y uso del lenguaje en
+        contextos sociales
+      </li>
+      <li>
+        Procesos lectoescritores y matemáticos (cuando es pertinente): habilidades
+        implicadas en la lectura, la escritura y el razonamiento matemático
+      </li>
+      <li>
+        Área emocional: identificación, expresión y regulación de las emociones,
+        así como posibles indicadores de malestar psicológico
+      </li>
+      <li>
+        Conducta: patrones conductuales, estilo de respuesta y adaptación a
+        normas y demandas del entorno
+      </li>
+      <li>
+        Procesamiento sensorial: forma en que el paciente percibe, procesa y
+        responde a los estímulos del entorno
+      </li>
+      <li>
+        Desarrollo y adaptación: nivel de autonomía, habilidades adaptativas y
+        funcionamiento en la vida cotidiana
+      </li>
+      <li>
+        Personalidad (en población adulta): rasgos de personalidad, estilo
+        relacional y patrones de funcionamiento psicológico
+      </li>
+    </ul>
 
-      <h2 class="text-2xl font-semibold text-gray-800 mb-4">
-        ¿Para qué problemas es efectiva?
-      </h2>
-      <ul class="list-disc pl-6 mb-4">
-        <li>Ansiedad</li>
-        <li>Depresión</li>
-        <li>Estrés</li>
-        <li>Fobias</li>
-        <li>Trastornos obsesivos</li>
-        <li>Problemas de autoestima</li>
-        <li>Otras dificultades emocionales y conductuales</li>
-      </ul>
-    </div>
-    <Image
-      height={200}
-      width={200}
-      class="object-cover w-1/2 max-w-80"
-      src="/svg/corazon.svg"
-      alt="Terapia cognitivo-conductual en Torrent"
-    />
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Cómo es el proceso</h2>
+    <p class="mb-4">
+      La evaluación diagnóstica se desarrolla a través de un proceso estructurado
+      en varias fases, que permite obtener una comprensión profunda y rigurosa del
+      perfil del paciente. Cada una de estas fases tiene un objetivo específico y
+      se adapta a las necesidades de cada caso.
+    </p>
+
+    <h3 class="text-xl font-semibold text-gray-800 mb-2">1. Entrevista inicial</h3>
+    <p class="mb-4">
+      El proceso comienza con una entrevista en profundidad con la familia (o con
+      el propio paciente, en caso de adolescentes o adultos). En esta fase se
+      recoge información relevante sobre:
+    </p>
+    <ul class="list-disc pl-6 mb-4">
+      <li>Historia del desarrollo</li>
+      <li>Motivo de consulta</li>
+      <li>
+        Funcionamiento actual en distintos contextos (casa, colegio, entorno
+        social)
+      </li>
+      <li>Antecedentes médicos, escolares y familiares</li>
+    </ul>
+    <p class="mb-4">
+      Esta información es fundamental para formular las primeras hipótesis
+      clínicas, que orientarán el proceso de evaluación.
+    </p>
+
+    <h3 class="text-xl font-semibold text-gray-800 mb-2">2. Evaluación clínica</h3>
+    <p class="mb-4">
+      A continuación, se inicia la fase de evaluación mediante la aplicación de
+      pruebas psicológicas estandarizadas y observación clínica. Las pruebas se
+      seleccionan en función de las hipótesis iniciales y permiten valorar
+      diferentes áreas, como el funcionamiento cognitivo, la atención, el
+      lenguaje, el área emocional o los procesos de aprendizaje. Durante esta
+      fase no solo se tienen en cuenta los resultados cuantitativos, sino también
+      la forma en la que el paciente responde, su estilo de afrontamiento, su
+      conducta y su interacción.
+    </p>
+
+    <h3 class="text-xl font-semibold text-gray-800 mb-2">
+      3. Evaluación diferencial
+    </h3>
+    <p class="mb-4">
+      Uno de los aspectos más importantes de nuestro modelo es que la evaluación
+      no es un proceso cerrado. A medida que se obtienen resultados, se van
+      tomando decisiones clínicas sobre la necesidad de ampliar la evaluación en
+      determinadas áreas. Esto permite:
+    </p>
+    <ul class="list-disc pl-6 mb-4">
+      <li>Profundizar en aspectos relevantes</li>
+      <li>Confirmar o descartar hipótesis diagnósticas</li>
+      <li>
+        Diferenciar entre dificultades que pueden presentar características
+        similares
+      </li>
+    </ul>
+    <p class="mb-4">
+      Este enfoque evita diagnósticos simplificados y permite una comprensión más
+      precisa y ajustada del caso.
+    </p>
+
+    <h3 class="text-xl font-semibold text-gray-800 mb-2">4. Integración clínica</h3>
+    <p class="mb-4">
+      Una vez finalizada la recogida de información, se realiza un proceso de
+      análisis e integración de todos los datos obtenidos. En esta fase, los
+      profesionales del equipo revisan conjuntamente el caso, contrastan la
+      información y elaboran una interpretación clínica global. Este trabajo
+      conjunto permite:
+    </p>
+    <ul class="list-disc pl-6 mb-4">
+      <li>Reducir sesgos individuales</li>
+      <li>Aumentar la fiabilidad de las conclusiones</li>
+      <li>
+        Obtener una visión más completa del funcionamiento del paciente
+      </li>
+    </ul>
+
+    <h3 class="text-xl font-semibold text-gray-800 mb-2">5. Informe</h3>
+    <p class="mb-4">
+      Con toda la información integrada, se elabora un informe detallado que
+      incluye:
+    </p>
+    <ul class="list-disc pl-6 mb-4">
+      <li>Descripción del proceso de evaluación</li>
+      <li>Resultados obtenidos en las distintas áreas</li>
+      <li>Interpretación clínica de dichos resultados</li>
+      <li>Orientación diagnóstica (cuando procede)</li>
+      <li>Recomendaciones específicas y adaptadas</li>
+    </ul>
+    <p class="mb-4">
+      El informe está redactado en un lenguaje comprensible, de manera que la
+      familia pueda entender no solo qué ocurre, sino también por qué ocurre y
+      cómo intervenir.
+    </p>
+
+    <h3 class="text-xl font-semibold text-gray-800 mb-2">6. Devolución</h3>
+    <p class="mb-4">
+      El proceso finaliza con una sesión de devolución en la que se explica el
+      contenido del informe de forma detallada. En esta sesión:
+    </p>
+    <ul class="list-disc pl-6 mb-4">
+      <li>Se resuelven dudas</li>
+      <li>Se aclaran los resultados</li>
+      <li>Se orienta a la familia sobre los siguientes pasos</li>
+    </ul>
+    <p class="mb-4">
+      El objetivo es que la familia salga con una comprensión clara del caso y con
+      herramientas concretas para poder actuar.
+    </p>
+
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Sobre las sesiones</h2>
+    <p class="mb-4">
+      El número de sesiones necesarias para completar la evaluación no es fijo,
+      ya que el proceso se adapta a las características y necesidades de cada caso.
+      Las sesiones de evaluación tienen una duración aproximada de 50 a 60
+      minutos. Este planteamiento flexible permite:
+    </p>
+    <ul class="list-disc pl-6 mb-4">
+      <li>
+        Adaptar el proceso a cada perfil sin limitar la evaluación a un número
+        cerrado de sesiones
+      </li>
+      <li>
+        Profundizar en aquellas áreas que lo requieran en función de los
+        resultados obtenidos
+      </li>
+      <li>Realizar un análisis diferencial completo y fundamentado</li>
+      <li>Evitar diagnósticos incompletos o poco precisos</li>
+    </ul>
+    <p class="mb-4">
+      En cualquier caso, el proceso se irá explicando y consensuando con la
+      familia a lo largo de la evaluación, manteniendo en todo momento la
+      transparencia y el acompañamiento. Es importante señalar que este proceso no
+      sigue un número fijo de sesiones, ya que se adapta a las necesidades
+      específicas de cada paciente.
+    </p>
+
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+      ¿Qué incluye la evaluación?
+    </h2>
+    <ul class="list-disc pl-6 mb-4">
+      <li>Entrevista clínica inicial</li>
+      <li>Sesiones de evaluación necesarias</li>
+      <li>Aplicación de pruebas estandarizadas y observación clínica</li>
+      <li>Corrección, análisis e interpretación de pruebas</li>
+      <li>Integración multidisciplinar</li>
+      <li>Elaboración de informe clínico completo</li>
+      <li>Sesión de devolución</li>
+    </ul>
+
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+      ¿Qué no incluye?
+    </h2>
+    <ul class="list-disc pl-6 mb-4">
+      <li>Informes adicionales específicos</li>
+      <li>Coordinación con centro escolar</li>
+      <li>Reevaluaciones futuras</li>
+    </ul>
+    <p class="mb-4">
+      Estos servicios, en caso de solicitarse, se presupuestarán de forma
+      independiente.
+    </p>
+
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">
+      Plazo de entrega del informe
+    </h2>
+    <p class="mb-4">
+      El plazo estimado de entrega del informe una vez finalizadas todas las
+      pruebas es de 6 semanas. Este plazo puede variar en función de la
+      complejidad del caso y del proceso de integración clínica.
+    </p>
+  </div>
+
+  <Image
+    height={500}
+    width={500}
+    src="/svg/tree.svg"
+    alt="Evaluación diagnóstica completa en Torrent"
+    class="object-cover w-1/2"
+  />
 </Layout>
-

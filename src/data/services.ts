@@ -1,4 +1,6 @@
 import {
+	Activity,
+	Apple,
 	Baby,
 	Brain,
 	ClipboardList,
@@ -19,7 +21,7 @@ type Service = {
 export const services: Service[] = [
 	{
 		icon: Brain,
-		title: 'Terapia cognitivo-conductual',
+		title: 'Evaluación, diagnóstico e intervención psicológica de neurodivergencias',
 		description:
 			'Enfoque terapéutico basado en evidencia científica que ayuda a identificar y modificar pensamientos, emociones y conductas disfuncionales.',
 		url: '/servicios/terapia-cognitivo-conductual',
@@ -39,13 +41,6 @@ export const services: Service[] = [
 		url: '/servicios/terapia-pareja',
 	},
 	{
-		icon: UsersRound,
-		title: 'Terapia sistémica o familiar',
-		description:
-			'Abordaje terapéutico que trabaja con la familia como sistema para mejorar la comunicación y resolver conflictos.',
-		url: '/servicios/terapia-sistemica-familiar',
-	},
-	{
 		icon: ClipboardList,
 		title: 'Evaluación Diagnóstica',
 		description:
@@ -60,10 +55,31 @@ export const services: Service[] = [
 		url: '/servicios/logopedia',
 	},
 	{
+		icon: UsersRound,
+		title: 'Terapia sistémica o familiar',
+		description:
+			'Abordaje terapéutico que trabaja con la familia como sistema para mejorar la comunicación y resolver conflictos.',
+		url: '/servicios/terapia-sistemica-familiar',
+	},
+	{
 		icon: GraduationCap,
 		title: 'Pedagogía',
 		description:
 			'Apoyo especializado para niños y adolescentes con dificultades en el aprendizaje y necesidades educativas especiales.',
 		url: '/servicios/pedagogia',
+	},
+	{
+		icon: Activity,
+		title: 'Fisioterapia',
+		description:
+			'Tratamiento para recuperar movilidad, aliviar dolor y prevenir lesiones mediante ejercicio terapéutico y técnicas manuales.',
+		url: '/servicios/fisioterapia',
+	},
+	{
+		icon: Apple,
+		title: 'Nutrición',
+		description:
+			'Asesoramiento nutricional personalizado para mejorar hábitos alimentarios, control de peso y bienestar integral.',
+		url: '/servicios/nutricion',
 	},
 ];

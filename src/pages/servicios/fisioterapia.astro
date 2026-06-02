@@ -1,0 +1,43 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import { Image } from 'astro:assets';
+---
+
+<ServiceLayout
+  service="Fisioterapia"
+  description="Fisioterapia en Torrent: recuperación de movilidad, alivio del dolor y prevención de lesiones. Tratamiento en Clínica 21 Días Psicoeducación."
+>
+  <div class="w-full md:w-1/2">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">¿Qué podemos ofrecer?</h2>
+    <p class="mb-4">
+      Nuestro servicio de fisioterapia está orientado a personas de todas las edades que
+      necesitan recuperar la funcionalidad, reducir el dolor o prevenir lesiones. A través
+      de técnicas manuales, ejercicio terapéutico y educación postural, ayudamos a
+      mejorar la calidad de vida y la autonomía de nuestros pacientes.
+    </p>
+
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Áreas de intervención</h2>
+    <ul class="list-disc pl-6 mb-4">
+      <li>Dolor musculoesquelético (cervical, lumbar, hombro, rodilla)</li>
+      <li>Rehabilitación post-lesión y post-cirugía</li>
+      <li>Corrección postural y ergonomía</li>
+      <li>Prevención de lesiones deportivas</li>
+      <li>Recuperación de movilidad y fuerza</li>
+    </ul>
+
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Metodología</h2>
+    <p class="mb-4">
+      Realizamos una valoración inicial personalizada para diseñar un plan de tratamiento
+      adaptado a cada persona. Combinamos técnicas manuales, ejercicios terapéuticos y
+      pautas de autocuidado, trabajando en coordinación con el resto del equipo
+      multidisciplinar de la clínica.
+    </p>
+  </div>
+  <Image
+    height={500}
+    width={500}
+    src="/svg/tree.svg"
+    alt="Fisioterapia en Torrent"
+    class="object-cover w-1/2"
+  />
+</ServiceLayout>

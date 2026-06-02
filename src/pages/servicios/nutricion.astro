@@ -1,0 +1,43 @@
+---
+import ServiceLayout from '../../layouts/ServiceLayout.astro';
+import { Image } from 'astro:assets';
+---
+
+<ServiceLayout
+  service="Nutrición"
+  description="Nutrición en Torrent: asesoramiento nutricional personalizado para hábitos saludables, control de peso y bienestar. Clínica 21 Días Psicoeducación."
+>
+  <div class="w-full md:w-1/2">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">¿Qué podemos ofrecer?</h2>
+    <p class="mb-4">
+      Nuestro servicio de nutrición ofrece un acompañamiento personalizado para mejorar
+      los hábitos alimentarios y promover un estilo de vida saludable. Trabajamos con
+      niños, adolescentes y adultos, adaptando las pautas a las necesidades y objetivos
+      de cada persona.
+    </p>
+
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Áreas de intervención</h2>
+    <ul class="list-disc pl-6 mb-4">
+      <li>Control y mantenimiento del peso</li>
+      <li>Educación alimentaria y hábitos saludables</li>
+      <li>Nutrición infantil y adolescente</li>
+      <li>Patologías metabólicas (diabetes, colesterol, hipertensión)</li>
+      <li>Alimentación en el deporte</li>
+    </ul>
+
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Metodología</h2>
+    <p class="mb-4">
+      Comenzamos con una valoración nutricional completa para elaborar un plan
+      alimentario realista y sostenible. Priorizamos cambios graduales y educación
+      nutricional, evitando dietas restrictivas, y coordinamos la intervención con
+      otros profesionales de la clínica cuando es necesario.
+    </p>
+  </div>
+  <Image
+    height={500}
+    width={500}
+    src="/svg/flor.svg"
+    alt="Nutrición en Torrent"
+    class="object-cover w-1/2"
+  />
+</ServiceLayout>

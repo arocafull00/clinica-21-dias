@@ -14,31 +14,32 @@ interface Props {
 
 const { icon: Icon, title, description, url, index, variant } = Astro.props;
 
-const iconSize = variant === 'featured' ? 48 : variant === 'wide' ? 40 : 32;
+const mobileIconSize = variant === 'featured' ? 28 : 22;
+const desktopIconSize = variant === 'featured' ? 48 : variant === 'wide' ? 40 : 32;
 
 const layoutClasses: Record<ServiceVariant, string> = {
 	featured:
-		'md:col-span-2 lg:col-span-2 lg:row-span-2 flex-col p-8 bg-gradient-to-br from-primary-50/90 via-white to-white min-h-[240px]',
-	wide: 'md:col-span-2 flex-col md:flex-row md:items-center gap-5 md:gap-8 p-6 md:p-7',
-	default: 'flex-col p-6',
+		'flex-row items-center gap-4 p-4 md:flex-col md:items-stretch md:p-8 md:col-span-2 lg:col-span-2 lg:row-span-2 bg-gradient-to-br from-primary-50/90 via-white to-white md:min-h-[240px]',
+	wide: 'flex-row items-center gap-3 p-4 md:col-span-2 md:flex-row md:items-center md:gap-8 md:p-7',
+	default: 'flex-row items-center gap-3 p-4 md:flex-col md:items-stretch md:p-6',
 };
 
 const iconWrapClasses: Record<ServiceVariant, string> = {
-	featured: 'mb-6 h-16 w-16 rounded-2xl bg-primary-100/70',
-	wide: 'shrink-0 h-14 w-14 rounded-xl bg-primary-50 md:mb-0 mb-4',
-	default: 'mb-4 h-12 w-12 rounded-xl bg-primary-50',
+	featured: 'shrink-0 h-12 w-12 rounded-xl bg-primary-100/70 md:mb-6 md:h-16 md:w-16 md:rounded-2xl',
+	wide: 'shrink-0 h-10 w-10 rounded-xl bg-primary-50 md:h-14 md:w-14',
+	default: 'shrink-0 h-10 w-10 rounded-xl bg-primary-50 md:mb-4 md:h-12 md:w-12',
 };
 
 const titleClasses: Record<ServiceVariant, string> = {
-	featured: 'text-2xl lg:text-3xl mb-4',
-	wide: 'text-xl md:text-2xl mb-2 md:mb-3',
-	default: 'text-lg mb-2',
+	featured: 'text-lg line-clamp-2 md:line-clamp-none md:text-2xl lg:text-3xl md:mb-4',
+	wide: 'text-base line-clamp-2 md:line-clamp-none md:text-xl lg:text-2xl md:mb-3',
+	default: 'text-base line-clamp-2 md:line-clamp-none md:text-lg md:mb-2',
 };
 
 const descriptionClasses: Record<ServiceVariant, string> = {
-	featured: 'text-base lg:text-lg leading-relaxed flex-1',
-	wide: 'text-sm md:text-base leading-relaxed',
-	default: 'text-sm leading-relaxed line-clamp-4',
+	featured: 'hidden md:block text-base lg:text-lg leading-relaxed flex-1',
+	wide: 'hidden md:block text-sm md:text-base leading-relaxed',
+	default: 'hidden md:block text-sm leading-relaxed line-clamp-4',
 };
 ---
 
@@ -58,43 +59,26 @@ const descriptionClasses: Record<ServiceVariant, string> = {
 		]}
 		aria-hidden="true"
 	>
-		<Icon size={iconSize} stroke-width={1.5} />
+		<Icon size={mobileIconSize} stroke-width={1.5} class="md:hidden" />
+		<Icon size={desktopIconSize} stroke-width={1.5} class="hidden md:block" />
 	</span>
 
-	{
-		variant === 'wide' ? (
-			<div class="flex min-w-0 flex-1 flex-col">
-				<h3
-					class:list={[
-						'font-semibold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent',
-						titleClasses[variant],
-					]}
-				>
-					{title}
-				</h3>
-				<p class:list={['text-secondary-500', descriptionClasses[variant]]}>
-					{description}
-				</p>
-			</div>
-		) : (
-			<>
-				<h3
-					class:list={[
-						'font-semibold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent',
-						titleClasses[variant],
-					]}
-				>
-					{title}
-				</h3>
-				<p class:list={['text-secondary-500', descriptionClasses[variant]]}>
-					{description}
-				</p>
-			</>
-		)
-	}
+	<div class="flex min-w-0 flex-1 flex-col">
+		<h3
+			class:list={[
+				'font-semibold bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent',
+				titleClasses[variant],
+			]}
+		>
+			{title}
+		</h3>
+		<p class:list={['text-secondary-500', descriptionClasses[variant]]}>
+			{description}
+		</p>
+	</div>
 
 	<span
-		class="pointer-events-none absolute bottom-5 right-5 text-primary-400 opacity-0 transition-all duration-300 group-hover:translate-x-0 group-hover:opacity-100 translate-x-1"
+		class="pointer-events-none shrink-0 text-primary-400 md:absolute md:bottom-5 md:right-5 md:opacity-0 md:transition-all md:duration-300 md:group-hover:translate-x-0 md:group-hover:opacity-100 md:translate-x-1"
 		aria-hidden="true"
 	>
 		<svg
