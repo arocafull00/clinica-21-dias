@@ -2,7 +2,7 @@
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
 
-type GalleryVariant = 'hero' | 'wide' | 'default';
+type GalleryVariant = 'hero' | 'wide' | 'large' | 'compact' | 'default';
 
 interface Props {
 	src: ImageMetadata;
@@ -17,6 +17,8 @@ const { src, alt, title, index, variant } = Astro.props;
 const layoutClasses: Record<GalleryVariant, string> = {
 	hero: 'col-span-2 row-span-2 min-h-[16rem] sm:min-h-[20rem]',
 	wide: 'col-span-2 min-h-[11rem]',
+	large: 'col-span-1 min-h-[9rem] sm:min-h-[10rem] md:col-span-3 md:min-h-[11rem]',
+	compact: 'col-span-1 min-h-[9rem] sm:min-h-[10rem] md:min-h-[11rem]',
 	default: 'min-h-[11rem]',
 };
 
@@ -33,9 +35,18 @@ const imageConfig: Record<GalleryVariant, { widths: number[]; sizes: string }> =
 		widths: [320, 480, 640],
 		sizes: '(max-width: 640px) 50vw, 25vw',
 	},
+	large: {
+		widths: [480, 768, 960],
+		sizes: '(max-width: 768px) 50vw, 75vw',
+	},
+	compact: {
+		widths: [240, 320, 480],
+		sizes: '(max-width: 768px) 50vw, 25vw',
+	},
 };
 
 const { widths, sizes } = imageConfig[variant];
+const isCompact = variant === 'compact';
 ---
 
 <figure
@@ -56,8 +67,15 @@ const { widths, sizes } = imageConfig[variant];
 		class="absolute inset-0 h-full w-full object-cover"
 	/>
 	<figcaption
-		class="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary-900/80 via-primary-900/35 to-transparent px-4 py-4 md:px-5 md:py-5"
+		class:list={[
+			'absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary-900/80 via-primary-900/35 to-transparent',
+			isCompact ? 'px-2 py-2 md:px-3 md:py-3' : 'px-4 py-4 md:px-5 md:py-5',
+		]}
 	>
-		<span class="text-sm font-semibold text-white md:text-base">{title}</span>
+		<span
+			class:list={[
+				'font-semibold text-white',
+				isCompact ? 'text-xs md:text-sm' : 'text-sm md:text-base',
+			]}>{title}</span>
 	</figcaption>
 </figure>

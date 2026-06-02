@@ -7,8 +7,9 @@ import img4 from '../assets/clinica/4.jpeg';
 import img5 from '../assets/clinica/5.jpeg';
 import img6 from '../assets/clinica/6.jpeg';
 import img7 from '../assets/clinica/7.jpeg';
+import imgFisio from '../assets/clinica/fisio.png';
 
-type GalleryVariant = 'hero' | 'wide' | 'default';
+type GalleryVariant = 'hero' | 'wide' | 'large' | 'compact' | 'default';
 
 const images = [
 	{
@@ -25,6 +26,11 @@ const images = [
 		src: img3,
 		alt: 'Área de recepción con pasillo y armarios',
 		title: 'Recepción',
+	},
+	{
+		src: imgFisio,
+		alt: 'Sala de fisioterapia con camilla y toallas verdes',
+		title: 'Fisioterapia',
 	},
 	{
 		src: img7,
@@ -50,12 +56,13 @@ const images = [
 
 function getVariant(index: number): GalleryVariant {
 	if (index === 0) return 'hero';
-	if (index === 3 || index === 6) return 'wide';
+	if (index === 3) return 'wide';
+	if (index === 7) return 'compact';
 	return 'default';
 }
 ---
 
-<section class="py-20 bg-gray-50" id="nuestras-instalaciones">
+<section class="py-20" id="nuestras-instalaciones">
 	<div class="container mx-auto px-4">
 		<h2 class="text-4xl font-bold text-center mb-4" data-reveal>
 			Nuestras{' '}
@@ -74,7 +81,7 @@ function getVariant(index: number): GalleryVariant {
 		</p>
 
 		<div
-			class="mx-auto grid max-w-6xl grid-cols-2 gap-3 auto-rows-[minmax(11rem,auto)] md:grid-cols-4 md:gap-4 md:auto-rows-[minmax(12rem,auto)]"
+			class="mx-auto grid max-w-6xl grid-cols-2 gap-3 auto-rows-[minmax(10rem,auto)] sm:auto-rows-[minmax(11rem,auto)] md:grid-cols-4 md:gap-4 md:auto-rows-[minmax(11rem,1fr)] lg:auto-rows-[minmax(12rem,1fr)]"
 		>
 			{
 				images.map((image, index) => (
