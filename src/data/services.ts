@@ -72,7 +72,7 @@ export const services: Service[] = [
 		icon: Activity,
 		title: 'Fisioterapia',
 		description:
-			'Cefaleas, migrañas y bruxismo',
+			' Tratamiento para recuperar movilidad, aliviar dolor y prevenir lesiones mediante ejercicio terapéutico y técnicas manuales.',
 		url: '/servicios/fisioterapia',
 	},
 	{
