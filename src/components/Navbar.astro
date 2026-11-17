@@ -7,29 +7,32 @@ const navLinks = [
 ];
 ---
 
-<header class="site-header fixed w-full z-50 top-0">
+<header class="site-header fixed inset-x-0 top-0 z-50 pt-3 lg:pt-4">
   <div class="wrap">
-    <nav class="flex items-center justify-between h-20 lg:h-24 w-full" aria-label="Principal">
-      <a href="/" class="shrink-0 font-serif text-ink leading-[0.95] text-[1.35rem] lg:text-[1.55rem]" aria-label="21 Días Psicoeducación, inicio">
-        21 Días<br /><span class="text-ink-soft">Psicoeducación</span>
+    <nav class="nav-pill flex items-center justify-between gap-6 h-16 pl-5 pr-2 lg:pl-7" aria-label="Principal">
+      <a href="/" class="shrink-0 font-serif text-ink text-[1.3rem] lg:text-[1.45rem] leading-none" aria-label="21 Días Psicoeducación, inicio">
+        21 Días <span class="text-ink-soft">Psicoeducación</span>
       </a>
 
-      <div class="hidden md:flex items-center gap-10 lg:gap-12">
+      <div class="hidden md:flex items-center gap-8 lg:gap-11">
         {
           navLinks.map((link) => (
-            <a href={link.href} class="nav-link text-sm font-medium text-ink">
+            <a href={link.href} class="nav-link text-[0.9375rem] font-medium text-ink">
               {link.label}
             </a>
           ))
         }
       </div>
 
-      <div class="hidden md:block"><a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" class="btn btn-sm">Reserva tu cita</a></div>
+      <div class="hidden md:flex items-center gap-2">
+        <a href="tel:+34640205738" class="btn-outline">Llamar</a>
+        <a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" class="btn btn-sm">Reserva tu cita</a>
+      </div>
 
       <button
         type="button"
         id="menu-toggle"
-        class="md:hidden -mr-2 p-2 text-ink"
+        class="md:hidden p-3 text-ink"
         aria-expanded="false"
         aria-controls="mobile-menu-panel"
         aria-label="Abrir menú de navegación"

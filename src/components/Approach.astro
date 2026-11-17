@@ -1,5 +1,5 @@
 ---
-import { Image } from 'astro:assets';
+import GlowImage from './GlowImage.astro';
 import approachImg from '../assets/clinica/5.jpeg';
 
 const steps = [
@@ -15,14 +15,13 @@ const steps = [
 	<div class="grid items-center gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,4fr)_minmax(0,3.4fr)] lg:gap-12 lg:pr-edge">
 		<div class="relative h-[22rem] sm:h-[28rem] lg:h-[30rem] mr-[var(--gutter)] lg:mr-0" data-reveal>
 			<div class="blob -left-[6%] top-[-4%] h-[70%] w-[52%] rounded-[0_60%_55%_0/0_55%_60%_0] bg-primary-300" aria-hidden="true"></div>
-			<div class="absolute inset-y-[6%] left-0 right-0 overflow-hidden rounded-[0_58%_46%_0/0_52%_58%_0]">
-				<Image
+			<div class="photo-glow absolute inset-y-[6%] left-0 right-0 overflow-hidden rounded-[0_58%_46%_0/0_52%_58%_0]">
+				<GlowImage
 					src={approachImg}
 					alt="Sala de terapia con mesa redonda y alfombra"
 					widths={[480, 768, 902]}
 					sizes="(max-width: 1024px) 95vw, 40vw"
-					loading="lazy"
-					class="photo h-full w-full object-cover object-[50%_65%]"
+					class="object-[50%_65%]"
 				/>
 			</div>
 		</div>

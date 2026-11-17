@@ -1,0 +1,44 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  widths: number[];
+  sizes: string;
+  loading?: 'eager' | 'lazy';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  class?: string;
+}
+
+const { src, alt, widths, sizes, loading = 'lazy', fetchpriority, class: className = '' } = Astro.props;
+---
+
+<Image {src} {alt} {widths} {sizes} {loading} {fetchpriority} class={`photo h-full w-full object-cover ${className}`} />
+<Image {src} alt="" aria-hidden="true" {widths} {sizes} {loading} class={`photo-color h-full w-full object-cover ${className}`} />
+
+<script>
+  document.querySelectorAll<HTMLElement>('.photo-glow').forEach((el) => {
+    let tx = 0, ty = 0, x = 0, y = 0, raf = 0;
+    const tick = () => {
+      x += (tx - x) * 0.12;
+      y += (ty - y) * 0.12;
+      el.style.setProperty('--glow-x', `${x}px`);
+      el.style.setProperty('--glow-y', `${y}px`);
+      raf = Math.abs(tx - x) + Math.abs(ty - y) > 0.5 ? requestAnimationFrame(tick) : 0;
+    };
+    el.addEventListener('pointerenter', (e) => {
+      const r = el.getBoundingClientRect();
+      tx = x = e.clientX - r.left;
+      ty = y = e.clientY - r.top;
+      tick();
+    });
+    el.addEventListener('pointermove', (e) => {
+      const r = el.getBoundingClientRect();
+      tx = e.clientX - r.left;
+      ty = e.clientY - r.top;
+      if (!raf) raf = requestAnimationFrame(tick);
+    });
+  });
+</script>
