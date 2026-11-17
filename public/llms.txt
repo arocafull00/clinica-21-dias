@@ -1,0 +1,28 @@
+# Clínica 21 Días Psicoeducación
+
+> Clínica de psicología y psicoeducación en Torrent (Valencia, España). Equipo multidisciplinar que ofrece terapia individual, de pareja, familiar e infantil, evaluación y diagnóstico de neurodivergencias, logopedia, pedagogía, fisioterapia y nutrición para niños, adolescentes y adultos.
+
+- Ubicación: Torrent, Valencia (España). Mapa: https://maps.app.goo.gl/hLzTC1JKWWrvXPjv6
+- Teléfono y WhatsApp: +34 640 205 738 (https://wa.me/34640205738)
+- Instagram: https://www.instagram.com/21diaspsicoeducacion/
+- Idioma del sitio: español
+
+## Páginas principales
+
+- [Inicio](https://21diaspsicoeducacion.es/): presentación de la clínica, servicios, equipo, instalaciones y contacto.
+
+## Servicios
+
+- [Evaluación, diagnóstico e intervención de neurodivergencias](https://21diaspsicoeducacion.es/servicios/terapia-cognitivo-conductual/): evaluación diagnóstica completa con enfoque diferencial, equipo multidisciplinar e informe clínico con validez sanitaria.
+- [Evaluación diagnóstica](https://21diaspsicoeducacion.es/servicios/evaluacion-diagnostica/): evaluaciones psicológicas e informes para niños, adolescentes y adultos.
+- [Psicología infantil](https://21diaspsicoeducacion.es/servicios/psicologia-infantil/): emociones, conducta y habilidades sociales en niños.
+- [Terapia de pareja](https://21diaspsicoeducacion.es/servicios/terapia-pareja/): comunicación, vínculo emocional y resolución de conflictos.
+- [Terapia sistémica o familiar](https://21diaspsicoeducacion.es/servicios/terapia-sistemica-familiar/): comunicación y conflictos dentro del sistema familiar.
+- [Logopedia](https://21diaspsicoeducacion.es/servicios/logopedia/): habla, lenguaje, voz y comunicación para niños y adultos.
+- [Pedagogía](https://21diaspsicoeducacion.es/servicios/pedagogia/): dificultades de aprendizaje y necesidades educativas especiales.
+- [Fisioterapia](https://21diaspsicoeducacion.es/servicios/fisioterapia/): movilidad, alivio del dolor y prevención de lesiones.
+- [Nutrición](https://21diaspsicoeducacion.es/servicios/nutricion/): asesoramiento nutricional personalizado y hábitos saludables.
+
+## Opcional
+
+- [Sitemap](https://21diaspsicoeducacion.es/sitemap-index.xml)
