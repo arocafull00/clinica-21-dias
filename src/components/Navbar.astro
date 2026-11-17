@@ -25,8 +25,8 @@ const navLinks = [
       </div>
 
       <div class="hidden md:flex items-center gap-2">
-        <a href="tel:+34640205738" class="btn-outline">Llamar</a>
-        <a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" class="btn btn-sm">Reserva tu cita</a>
+        <a href="tel:+34640205738" class="btn-outline" data-clic="llamar-menu">Llamar</a>
+        <a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" class="btn btn-sm" data-clic="reserva-menu">Reserva tu cita</a>
       </div>
 
       <button
@@ -71,7 +71,7 @@ const navLinks = [
           </a>
         ))
       }
-      <a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" class="mobile-menu-item btn self-start mt-6" style="--i: 3">Reserva tu cita</a>
+      <a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" class="mobile-menu-item btn self-start mt-6" style="--i: 3" data-clic="reserva-menu-movil">Reserva tu cita</a>
     </div>
   </div>
 </header>

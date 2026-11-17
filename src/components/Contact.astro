@@ -9,7 +9,7 @@ import { MAP_URL, WHATSAPP_BOOKING_URL } from "../lib/seo";
     <div data-reveal>
       <p class="eyebrow">Contacto</p>
       <h2 class="display mt-7 text-6xl md:text-7xl text-ink">Reserva tu cita.</h2>
-      <a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" class="btn btn-dark mt-10">
+      <a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" class="btn btn-dark mt-10" data-clic="reserva-contacto">
         Escríbenos por WhatsApp
       </a>
     </div>
@@ -19,8 +19,8 @@ import { MAP_URL, WHATSAPP_BOOKING_URL } from "../lib/seo";
         <a href={MAP_URL} target="_blank" rel="noopener noreferrer" class="block hover:text-primary-600 transition-colors">
           Calle San Valeriano 20A<br />Torrent, Valencia
         </a>
-        <a href="tel:+34640205738" class="block hover:text-primary-600 transition-colors">+34 640 20 57 38</a>
-        <a href="mailto:clinica@21diaspsicoeducacion.es" class="block break-all hover:text-primary-600 transition-colors">clinica@21diaspsicoeducacion.es</a>
+        <a href="tel:+34640205738" data-clic="telefono-contacto" class="block hover:text-primary-600 transition-colors">+34 640 20 57 38</a>
+        <a href="mailto:clinica@21diaspsicoeducacion.es" data-clic="email-contacto" class="block break-all hover:text-primary-600 transition-colors">clinica@21diaspsicoeducacion.es</a>
         <a href="https://www.instagram.com/21diaspsicoeducacion/" target="_blank" rel="noopener noreferrer" class="block hover:text-primary-600 transition-colors">@21diaspsicoeducacion</a>
       </address>
       <dl class="space-y-5 sm:pl-10">

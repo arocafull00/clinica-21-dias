@@ -1,0 +1,8 @@
+<script>
+  document.addEventListener('click', (event) => {
+    const link = (event.target as Element).closest<HTMLElement>('[data-clic]');
+    if (!link) return;
+    const path = `/clic/${link.dataset.clic}`;
+    window.va?.('pageview', { route: path, path });
+  });
+</script>
