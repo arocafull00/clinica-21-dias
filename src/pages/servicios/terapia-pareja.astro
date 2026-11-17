@@ -1,6 +1,6 @@
 ---
+import serviceImage from "../../assets/clinica/1.jpeg";
 import ServiceLayout from "../../layouts/ServiceLayout.astro";
-import { Image } from "astro:assets";
 
 const title = "Terapia de Pareja";
 ---
@@ -8,8 +8,10 @@ const title = "Terapia de Pareja";
 <ServiceLayout
   service={title}
   description="Terapia de pareja en Torrent: comunicación, vínculo emocional y resolución de conflictos. Espacio seguro en Clínica 21 Días Psicoeducación."
+  image={serviceImage}
+  imageAlt="Consulta con sillón y escritorio"
 >
-  <div class="w-full md:w-1/2">
+  <div>
     <h2 class="text-2xl font-semibold text-gray-800 mb-4" transition:name={`service-title-${title}`}>
       ¿Qué es la Terapia de Pareja?
     </h2>
@@ -45,13 +47,5 @@ const title = "Terapia de Pareja";
       <li>Recuperación de la confianza</li>
     </ul>
   </div>
-  <Image
-    height={500}
-    width={500}
-    src="/svg/pareja2.svg"
-    alt="Terapia de pareja en Torrent"
-    transition:name={`service-image-${title}`}
-    class="w-full md:w-1/2 object-contain"
-  />
 </ServiceLayout>
 

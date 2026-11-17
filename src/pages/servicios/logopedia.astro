@@ -1,14 +1,16 @@
 ---
+import serviceImage from "../../assets/clinica/6.jpeg";
 import ServiceLayout from '../../layouts/ServiceLayout.astro';
-import {Image} from 'astro:assets';
 ---
 
 
 <ServiceLayout
   service="Logopedia"
   description="Logopedia en Torrent: habla, lenguaje, voz y comunicación para niños y adultos. Tratamiento en Clínica 21 Días Psicoeducación."
+  image={serviceImage}
+  imageAlt="Sala de logopedia con decoración lúdica"
 >
-  <div class="w-full md:w-1/2">
+  <div>
   <h2 class="text-2xl font-semibold text-gray-800 mb-4">¿Qué es la Logopedia?</h2>
   <p class="mb-4">
     El servicio de logopedia está dirigido a niños y adultos que presentan dificultades en el habla, el lenguaje, la voz o la comunicación. Trabajamos problemas como dislalias, tartamudez, afasias, trastornos del lenguaje en el neurodesarrollo y dificultades en la deglución. A través de técnicas especializadas, ayudamos a mejorar la comunicación y la calidad de vida de nuestros pacientes.
@@ -44,11 +46,4 @@ import {Image} from 'astro:assets';
     Nuestro enfoque combina técnicas específicas de logopedia con actividades lúdicas y motivadoras, adaptadas a la edad y necesidades de cada paciente. Trabajamos en estrecha colaboración con familias y otros profesionales para garantizar los mejores resultados.
   </p>
   </div>
-  <Image
-    height={500}
-    width={500}
-    src="/svg/read.svg"
-    alt="Logopedia en Torrent"
-    class="object-cover w-1/2"
-  />
 </ServiceLayout> 

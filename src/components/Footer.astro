@@ -4,35 +4,27 @@ import { services } from '../data/services';
 const currentYear = new Date().getFullYear();
 ---
 
-<footer
-  class="text-gray-800 py-16 border-t border-primary-200 flex flex-col items-center justify-center gap-8 px-4"
->
-  <nav aria-label="Servicios" class="w-full max-w-3xl">
-    <h2 class="text-center text-lg font-semibold text-gray-800 mb-4">Servicios</h2>
-    <ul class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
-      {
-        services.map((service) => (
-          <li>
-            <a
-              href={service.url}
-              class="text-primary-500 hover:text-primary-600 transition-colors"
-            >
-              {service.title}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
-  <p class="text-center">
-    <span class="text-primary-400">&copy; {currentYear}</span> 21 Días Psicoeducación. Clínica de Psicología. Todos los derechos reservados.
-  </p>
-  <a
-    href="https://adrianrocafull.es/"
-    target="_blank"
-    rel="noopener noreferrer"
-    class="text-primary-400"
-  >
-    Web desarrollada por <span class="font-bold">Adrian Rocafull</span>
-  </a>
+<footer class="relative bg-ink text-white/70">
+  <div class="wrap grid gap-12 py-16 md:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
+    <a href="/" class="font-serif text-2xl leading-[0.95] text-white self-start">
+      21 Días<br />Psicoeducación
+    </a>
+    <nav aria-label="Servicios">
+      <ul class="grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2 lg:grid-cols-3">
+        {
+          services.map((service) => (
+            <li>
+              <a href={service.url} class="hover:text-white transition-colors">{service.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+  <div class="wrap flex flex-col gap-2 border-t border-white/10 py-6 text-xs sm:flex-row sm:justify-between">
+    <p>&copy; {currentYear} 21 Días Psicoeducación. Clínica de Psicología en Torrent.</p>
+    <a href="https://adrianrocafull.es/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">
+      Web desarrollada por Adrian Rocafull
+    </a>
+  </div>
 </footer>

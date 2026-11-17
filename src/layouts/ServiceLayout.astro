@@ -1,41 +1,56 @@
 ---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
 import Layout from './Layout.astro';
 import ServiceJsonLd from '../components/ServiceJsonLd.astro';
+import Contact from '../components/Contact.astro';
 import Footer from '../components/Footer.astro';
-import { SITE_NAME } from '../lib/seo';
+import defaultImage from '../assets/clinica/1.jpeg';
+import { SITE_NAME, WHATSAPP_BOOKING_URL } from '../lib/seo';
 
 interface Props {
 	service: string;
 	description: string;
 	ogImage?: string;
+	image?: ImageMetadata;
+	imageAlt?: string;
 }
 
-const { service, description, ogImage } = Astro.props;
+const { service, description, ogImage, image = defaultImage, imageAlt = 'Instalaciones de la clínica 21 Días en Torrent' } = Astro.props;
 const pageTitle = `${service} en Torrent | ${SITE_NAME}`;
 ---
 
 <Layout title={pageTitle} description={description} ogImage={ogImage}>
 	<ServiceJsonLd slot="head" name={service} description={description} />
-	<main id="contenido-principal" class="container mx-auto px-4 pt-12 flex flex-col items-center justify-center mt-16">
-		<h1 class="text-4xl font-bold text-primary-600 mb-8" data-reveal>{service}</h1>
-		<hr class="w-full border-t border-gray-200 mb-6 md:mb-8" data-reveal style="--i: 1">
-		<div class="prose max-w-none">
-			<div class="flex flex-col md:flex-row items-center justify-between gap-10" data-reveal style="--i: 2">
+	<main id="contenido-principal">
+		<section class="relative isolate overflow-hidden grid items-end gap-10 pt-28 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:pt-36">
+			<div class="hero-enter pl-edge pr-[var(--gutter)] lg:pb-16">
+				<a href="/#servicios" class="eyebrow hover:text-primary-600 transition-colors" style="--i: 0">Servicios</a>
+				<h1 class="display mt-7 text-5xl sm:text-6xl xl:text-7xl text-ink" style="--i: 1">{service}</h1>
+				<p class="mt-7 max-w-xl text-base md:text-[1.0625rem] leading-relaxed text-ink-soft" style="--i: 2">{description}</p>
+			</div>
+			<div class="hero-media relative h-64 sm:h-80 lg:h-[26rem] ml-[var(--gutter)] lg:ml-0">
+				<div class="blob left-0 top-[4%] h-[80%] w-[55%] rounded-[50%_50%_45%_55%/55%_45%_55%_45%] bg-primary-300" style="--i: 0" aria-hidden="true"></div>
+				<div class="absolute inset-y-0 right-0 left-[14%] overflow-hidden rounded-[60%_0_0_40%/50%_0_0_32%]" style="--i: 1">
+					<Image src={image} alt={imageAlt} widths={[480, 768]} sizes="(max-width: 1024px) 90vw, 40vw" loading="eager" class="photo h-full w-full object-cover" />
+				</div>
+				<div class="absolute -right-[10%] -bottom-[18%] h-[50%] w-[44%] rounded-full bg-lavender-200" style="--i: 2" aria-hidden="true"></div>
+			</div>
+		</section>
+
+		<div class="wrap grid gap-16 py-20 lg:grid-cols-[minmax(0,8fr)_minmax(0,4fr)] lg:gap-20 lg:py-28">
+			<article class="service-content max-w-2xl">
 				<slot />
-			</div>
-			<div class="bg-primary-50 p-6 rounded-lg mt-8" data-reveal style="--i: 3">
-				<h2 class="text-2xl text-center md:text-left font-semibold text-gray-800 mb-4">¿Necesitas ayuda?</h2>
-				<p class="text-center md:text-left mb-4">
-					Contacta con nosotros para programar una consulta inicial y comenzar tu proceso terapéutico.
+			</article>
+			<aside class="lg:sticky lg:top-32 self-start border-t border-ink-line pt-8">
+				<p class="font-serif text-3xl leading-tight text-ink">¿Necesitas ayuda?</p>
+				<p class="mt-3 text-[0.9375rem] leading-relaxed text-ink-soft">
+					Cuéntanos tu caso y te orientamos en una primera consulta.
 				</p>
-				<a
-					href="/#contacto"
-					class="btn-press inline-block text-center w-full md:w-fit bg-primary-500 text-white px-6 py-2 rounded-lg hover:bg-primary-600"
-				>
-					Contactar
-				</a>
-			</div>
+				<a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" class="btn mt-7">Reserva tu cita</a>
+			</aside>
 		</div>
+		<Contact />
 	</main>
 	<Footer />
 </Layout>

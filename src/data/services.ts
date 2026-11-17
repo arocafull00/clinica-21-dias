@@ -1,18 +1,5 @@
-import {
-	Activity,
-	Apple,
-	Baby,
-	Brain,
-	ClipboardList,
-	GraduationCap,
-	HeartHandshake,
-	Speech,
-	UsersRound,
-} from 'lucide-astro';
-import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
-
 type Service = {
-	icon: AstroComponentFactory;
+	name: string;
 	title: string;
 	description: string;
 	url: string;
@@ -20,63 +7,63 @@ type Service = {
 
 export const services: Service[] = [
 	{
-		icon: Brain,
+		name: 'Neurodivergencias',
 		title: 'Evaluación, diagnóstico e intervención psicológica de neurodivergencias',
 		description:
 			'Enfoque terapéutico basado en evidencia científica que ayuda a identificar y modificar pensamientos, emociones y conductas disfuncionales.',
 		url: '/servicios/terapia-cognitivo-conductual',
 	},
 	{
-		icon: Baby,
+		name: 'Psicología infantil',
 		title: 'Psicología Infantil',
 		description:
 			'Terapia especializada para niños que les ayuda a comprender y gestionar sus emociones, mejorar su conducta y desarrollar habilidades sociales.',
 		url: '/servicios/psicologia-infantil',
 	},
 	{
-		icon: HeartHandshake,
+		name: 'Terapia de pareja',
 		title: 'Terapia de Pareja',
 		description:
 			'Espacio seguro para mejorar la comunicación, fortalecer el vínculo emocional y resolver conflictos en la relación.',
 		url: '/servicios/terapia-pareja',
 	},
 	{
-		icon: ClipboardList,
+		name: 'Evaluación diagnóstica',
 		title: 'Evaluación Diagnóstica',
 		description:
 			'Evaluaciones psicológicas completas para niños, adolescentes y adultos, incluyendo trastornos psicológicos y del neurodesarrollo.',
 		url: '/servicios/evaluacion-diagnostica',
 	},
 	{
-		icon: Speech,
+		name: 'Logopedia',
 		title: 'Logopedia',
 		description:
 			'Tratamiento especializado para dificultades en el habla, el lenguaje, la voz y la comunicación.',
 		url: '/servicios/logopedia',
 	},
 	{
-		icon: UsersRound,
+		name: 'Terapia sistémica o familiar',
 		title: 'Terapia sistémica o familiar',
 		description:
 			'Abordaje terapéutico que trabaja con la familia como sistema para mejorar la comunicación y resolver conflictos.',
 		url: '/servicios/terapia-sistemica-familiar',
 	},
 	{
-		icon: GraduationCap,
+		name: 'Pedagogía',
 		title: 'Pedagogía',
 		description:
 			'Apoyo especializado para niños y adolescentes con dificultades en el aprendizaje y necesidades educativas especiales.',
 		url: '/servicios/pedagogia',
 	},
 	{
-		icon: Activity,
+		name: 'Fisioterapia',
 		title: 'Fisioterapia',
 		description:
-			' Tratamiento para recuperar movilidad, aliviar dolor y prevenir lesiones mediante ejercicio terapéutico y técnicas manuales.',
+			'Tratamiento para recuperar movilidad, aliviar dolor y prevenir lesiones mediante ejercicio terapéutico y técnicas manuales.',
 		url: '/servicios/fisioterapia',
 	},
 	{
-		icon: Apple,
+		name: 'Nutrición',
 		title: 'Nutrición',
 		description:
 			'Asesoramiento nutricional personalizado para mejorar hábitos alimentarios, control de peso y bienestar integral.',

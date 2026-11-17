@@ -1,7 +1,6 @@
 ---
 import '../styles/global.css';
 import Navbar from '../components/Navbar.astro';
-import Background from '../components/Background.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import RevealObserver from '../components/RevealObserver.astro';
 import LocalBusinessJsonLd from '../components/LocalBusinessJsonLd.astro';
@@ -47,7 +46,7 @@ const useDefaultOgDimensions = ogImage === DEFAULT_OG_IMAGE || ogImage.endsWith(
 ---
 
 <!doctype html>
-<html lang="es" class="bg-white scroll-smooth font-sans">
+<html lang="es" class="bg-paper scroll-smooth font-sans text-ink">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="description" content={description} />
@@ -55,6 +54,12 @@ const useDefaultOgDimensions = ogImage === DEFAULT_OG_IMAGE || ogImage.endsWith(
 		<link rel="icon" type="image/png" href="/flor.png" />
 		<link rel="apple-touch-icon" href="/flor.png" />
 		<meta name="generator" content={Astro.generator} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			rel="stylesheet"
+			href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@400;500;600;700&display=swap"
+		/>
 		{noindex ? (
 			<meta name="robots" content="noindex, nofollow" />
 		) : (
@@ -84,16 +89,15 @@ const useDefaultOgDimensions = ogImage === DEFAULT_OG_IMAGE || ogImage.endsWith(
 		{includeBusinessJsonLd && <LocalBusinessJsonLd />}
 		<slot name="head" />
 	</head>
-	<body class="relative">
+	<body class="relative bg-paper overflow-x-clip">
 		<a
 			href="#contenido-principal"
-			class="fixed left-4 top-0 z-[100] -translate-y-full px-4 py-2 bg-primary-600 text-white rounded-lg shadow-md transition-transform focus:translate-y-4 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
+			class="fixed left-4 top-0 z-[100] -translate-y-full px-4 py-2 bg-ink text-white rounded-full transition-transform focus:translate-y-4 focus:outline-none focus:ring-2 focus:ring-primary-400 focus:ring-offset-2"
 		>
 			Saltar al contenido
 		</a>
 		<Navbar />
 		<slot />
-		<Background />
 		<WhatsAppButton />
 		<RevealObserver />
 	</body>

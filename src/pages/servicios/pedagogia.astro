@@ -1,13 +1,15 @@
 ---
+import serviceImage from "../../assets/clinica/7.jpeg";
 import ServiceLayout from "../../layouts/ServiceLayout.astro";
-import { Image } from "astro:assets";
 ---
 
 <ServiceLayout
   service="Pedagogía"
   description="Apoyo pedagógico en Torrent para niños y adolescentes con dificultades de aprendizaje y necesidades educativas especiales. Clínica 21 Días Psicoeducación."
+  image={serviceImage}
+  imageAlt="Espacio de trabajo con mesa redonda"
 >
-  <div class="w-full md:w-1/2">
+  <div>
     <h2 class="text-2xl font-semibold text-gray-800 mb-4">
       ¿Qué podemos ofrecer?
     </h2>
@@ -55,12 +57,5 @@ import { Image } from "astro:assets";
     </p>
 
   </div>
-  <Image
-    height={500}
-    width={500}
-    src="/svg/kids.svg"
-    alt="Pedagogía en Torrent"
-    class="object-cover w-1/2"
-  />
 </ServiceLayout>
 

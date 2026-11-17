@@ -1,99 +1,65 @@
 ---
-import GalleryItem from './GalleryItem.astro';
-import img1 from '../assets/clinica/1.jpeg';
+import { Image } from 'astro:assets';
 import img2 from '../assets/clinica/2.jpeg';
 import img3 from '../assets/clinica/3.jpeg';
 import img4 from '../assets/clinica/4.jpeg';
-import img5 from '../assets/clinica/5.jpeg';
 import img6 from '../assets/clinica/6.jpeg';
 import img7 from '../assets/clinica/7.jpeg';
 import imgFisio from '../assets/clinica/fisio.png';
 
-type GalleryVariant = 'hero' | 'wide' | 'large' | 'compact' | 'default';
-
-const images = [
-	{
-		src: img2,
-		alt: 'Sala de terapia con mesa y sillas',
-		title: 'Sala de terapia grupal',
-	},
-	{
-		src: img4,
-		alt: 'Mostrador de recepción blanco con lámparas',
-		title: 'Recepción',
-	},
-	{
-		src: img3,
-		alt: 'Área de recepción con pasillo y armarios',
-		title: 'Recepción',
-	},
-	{
-		src: imgFisio,
-		alt: 'Sala de fisioterapia con camilla y toallas verdes',
-		title: 'Fisioterapia',
-	},
-	{
-		src: img7,
-		alt: 'Espacio de trabajo con mesa redonda y escritorio',
-		title: 'Terapias infantiles',
-	},
-	{
-		src: img5,
-		alt: 'Sala circular con mesa verde y alfombra artística',
-		title: 'Sala de terapia',
-	},
-	{
-		src: img1,
-		alt: 'Consultorio con escritorio y sillas tapizadas',
-		title: 'Sala de terapia',
-	},
-	{
-		src: img6,
-		alt: 'Sala de logopedia con camilla y decoración lúdica',
-		title: 'Sala de logopedia',
-	},
+const photos = [
+	{ src: img4, alt: 'Mostrador de recepción blanco con lámpara', title: 'Recepción' },
+	{ src: img6, alt: 'Sala de logopedia con camilla y decoración lúdica', title: 'Logopedia' },
+	{ src: img2, alt: 'Sala de terapia grupal con mesa y sillas', title: 'Terapia grupal' },
+	{ src: imgFisio, alt: 'Sala de fisioterapia con camilla', title: 'Fisioterapia' },
+	{ src: img3, alt: 'Pasillo y área de recepción', title: 'Entrada' },
 ];
-
-function getVariant(index: number): GalleryVariant {
-	if (index === 0) return 'hero';
-	if (index === 3) return 'wide';
-	if (index === 7) return 'compact';
-	return 'default';
-}
 ---
 
-<section class="py-20" id="nuestras-instalaciones">
-	<div class="container mx-auto px-4">
-		<h2 class="text-4xl font-bold text-center mb-4" data-reveal>
-			Nuestras{' '}
-			<span class="bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent relative">
-				Instalaciones
-				<span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary-600 to-primary-400 rounded-full"></span>
-			</span>
-		</h2>
-		<p
-			class="text-center text-secondary-500 mb-12 max-w-2xl mx-auto mt-8"
-			data-reveal
-			style="--i: 1"
-		>
-			Conoce nuestros espacios diseñados para brindarte la mayor comodidad y
-			privacidad durante tu proceso terapéutico.
-		</p>
-
-		<div
-			class="mx-auto grid max-w-6xl grid-cols-2 gap-3 auto-rows-[minmax(10rem,auto)] sm:auto-rows-[minmax(11rem,auto)] md:grid-cols-4 md:gap-4 md:auto-rows-[minmax(11rem,1fr)] lg:auto-rows-[minmax(12rem,1fr)]"
-		>
-			{
-				images.map((image, index) => (
-					<GalleryItem
-						src={image.src}
-						alt={image.alt}
-						title={image.title}
-						index={index}
-						variant={getVariant(index)}
-					/>
-				))
-			}
+<section id="el-centro" class="relative isolate overflow-hidden py-20 lg:py-28">
+	<div class="grid items-center gap-12 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+		<div class="pl-edge pr-[var(--gutter)] lg:pr-0" data-reveal>
+			<p class="eyebrow">Nuestro espacio</p>
+			<h2 class="display mt-7 text-5xl md:text-[3.6rem] text-ink">
+				Un lugar pensado para sentirte cómodo.
+			</h2>
+			<p class="mt-6 max-w-sm text-[0.9375rem] leading-relaxed text-ink-soft">
+				Contamos con un espacio acogedor y adaptado para acompañarte en cada etapa.
+			</p>
 		</div>
+
+		<div class="relative h-[20rem] sm:h-[26rem] lg:h-[28rem] ml-[var(--gutter)] lg:ml-0" data-reveal style="--i: 1">
+			<div class="blob -right-[10%] -bottom-[16%] h-[62%] w-[34%] rounded-[60%_0_0_50%/55%_0_0_45%] bg-primary-300" aria-hidden="true"></div>
+			<div class="absolute inset-0 right-[4%] overflow-hidden rounded-[30%_2rem_14%_2rem/46%_2rem_30%_2rem]">
+				<Image
+					src={img7}
+					alt="Sala de terapia infantil con mesa redonda y escritorio"
+					widths={[640, 960, 1400]}
+					sizes="(max-width: 1024px) 95vw, 58vw"
+					loading="lazy"
+					class="photo h-full w-full object-cover"
+				/>
+			</div>
+		</div>
+	</div>
+
+	<div class="gallery-strip wrap mt-16 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 lg:mt-20 lg:grid lg:grid-cols-5 lg:overflow-visible">
+		{
+			photos.map((photo, index) => (
+				<figure class="w-[62vw] max-w-[16rem] shrink-0 snap-start lg:w-auto lg:max-w-none" data-reveal style={`--i: ${index}`}>
+					<div class="aspect-[4/5] overflow-hidden rounded-[1.75rem]">
+						<Image
+							src={photo.src}
+							alt={photo.alt}
+							widths={[320, 480]}
+							sizes="(max-width: 1024px) 62vw, 20vw"
+							loading="lazy"
+							class="photo h-full w-full object-cover"
+						/>
+					</div>
+					<figcaption class="mt-3 text-[0.8125rem] text-ink-soft">{photo.title}</figcaption>
+				</figure>
+			))
+		}
 	</div>
 </section>

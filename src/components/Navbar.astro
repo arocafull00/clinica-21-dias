@@ -1,67 +1,41 @@
 ---
+import { WHATSAPP_BOOKING_URL } from "../lib/seo";
 const navLinks = [
-  { href: "/#nuestros-servicios", label: "Servicios" },
-  { href: "/#nuestras-instalaciones", label: "Instalaciones" },
-  { href: "/#testimonios", label: "Testimonios" },
+  { href: "/#servicios", label: "Servicios" },
+  { href: "/#el-centro", label: "El centro" },
   { href: "/#contacto", label: "Contacto" },
 ];
-
-const navLinkClass =
-  "nav-link text-secondary-900 text-sm lg:text-base hover:text-primary-500 transition-colors whitespace-nowrap";
-const mobileNavLinkClass =
-  "mobile-menu-item text-3xl text-secondary-900 hover:text-primary-500 transition-colors";
-const ctaClass =
-  "btn-press inline-flex items-center justify-center text-white bg-primary-500 px-5 py-2 rounded-full text-sm lg:text-base font-semibold hover:bg-primary-600 shadow-md whitespace-nowrap";
 ---
 
-<header class="site-header fixed w-full z-50 top-0 bg-white">
-  <div class="px-4 md:px-8 lg:px-16 xl:px-32">
-    <nav
-      class="flex items-center justify-between h-16 lg:h-20 w-full"
-      aria-label="Principal"
-    >
-      <a
-        href="/#inicio"
-        class="shrink-0 text-primary-500 text-lg lg:text-2xl font-bold"
-      >
-        21 dias psicoeducación
+<header class="site-header fixed w-full z-50 top-0">
+  <div class="wrap">
+    <nav class="flex items-center justify-between h-20 lg:h-24 w-full" aria-label="Principal">
+      <a href="/" class="shrink-0 font-serif text-ink leading-[0.95] text-[1.35rem] lg:text-[1.55rem]" aria-label="21 Días Psicoeducación, inicio">
+        21 Días<br /><span class="text-ink-soft">Psicoeducación</span>
       </a>
 
-      <div class="hidden md:flex items-center gap-8 xl:gap-10">
+      <div class="hidden md:flex items-center gap-10 lg:gap-12">
         {
           navLinks.map((link) => (
-            <a href={link.href} class={navLinkClass}>
+            <a href={link.href} class="nav-link text-sm font-medium text-ink">
               {link.label}
             </a>
           ))
         }
       </div>
 
-      <a href="/#contacto" class={`hidden md:inline-flex shrink-0 ${ctaClass}`}>
-        Reserva Cita
-      </a>
+      <div class="hidden md:block"><a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" class="btn btn-sm">Reserva tu cita</a></div>
 
       <button
         type="button"
         id="menu-toggle"
-        class="md:hidden text-secondary-900 hover:text-primary-500"
+        class="md:hidden -mr-2 p-2 text-ink"
         aria-expanded="false"
         aria-controls="mobile-menu-panel"
         aria-label="Abrir menú de navegación"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"></path>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-width="1.5" d="M4 8h16M4 16h16"></path>
         </svg>
       </button>
     </nav>
@@ -69,46 +43,32 @@ const ctaClass =
 
   <div
     id="mobile-menu-panel"
-    class="fixed inset-0 invisible opacity-0 md:hidden bg-white z-50 transition-all duration-300 ease-in-out"
+    class="fixed inset-0 invisible opacity-0 md:hidden bg-paper z-50 transition-opacity duration-300 ease-in-out"
     role="dialog"
     aria-modal="true"
     aria-label="Menú principal"
     inert
   >
-    <div
-      class="flex flex-col items-center justify-center min-h-screen w-full gap-8 p-4 bg-white"
-    >
+    <div class="relative flex flex-col justify-center min-h-screen w-full gap-6 px-8 overflow-hidden">
+      <div class="blob -right-24 -bottom-24 h-80 w-80 rounded-full bg-lavender-200" aria-hidden="true"></div>
       <button
         type="button"
         id="close-menu"
-        class="absolute top-5 right-4 text-secondary-900 hover:text-primary-500 p-2"
+        class="absolute top-6 right-3 p-2 text-ink"
         aria-label="Cerrar menú"
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"></path>
-          </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
       </button>
       {
         navLinks.map((link, index) => (
-          <a href={link.href} class={mobileNavLinkClass} style={`--i: ${index}`}>
+          <a href={link.href} class="mobile-menu-item font-serif text-5xl text-ink" style={`--i: ${index}`}>
             {link.label}
           </a>
         ))
       }
-      <a href="/#contacto" class={`mobile-menu-item ${ctaClass} text-lg px-8 py-3`} style="--i: 4">
-        Reserva Cita
-      </a>
+      <a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" class="mobile-menu-item btn self-start mt-6" style="--i: 3">Reserva tu cita</a>
     </div>
   </div>
 </header>

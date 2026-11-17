@@ -1,13 +1,15 @@
 ---
+import serviceImage from "../../assets/clinica/5.jpeg";
 import Layout from "../../layouts/ServiceLayout.astro";
-import { Image } from "astro:assets";
 ---
 
 <Layout
   service="Evaluación diagnóstica completa de neurodivergencias"
   description="Evaluación diagnóstica completa en Torrent para niños, adolescentes y adultos. Enfoque diferencial, equipo multidisciplinar e informe clínico con validez sanitaria. Clínica 21 Días."
+  image={serviceImage}
+  imageAlt="Sala de terapia con mesa redonda"
 >
-  <div class="w-full">
+  <div>
     <h2 class="text-2xl font-semibold text-gray-800 mb-4">
       ¿Qué es nuestra evaluación?
     </h2>

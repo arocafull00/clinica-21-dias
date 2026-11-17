@@ -4,43 +4,46 @@ export default {
   theme: {
     extend: {
       colors: {
+        paper: '#f7f6f2',
+        ink: {
+          DEFAULT: '#1d1d1b',
+          soft: '#55554f',
+          line: '#e2e0d8',
+        },
         primary: {
-          50: '#e6fdfb',  // Muy claro, casi blanco
-          100: '#ccfbf7',
-          200: '#99f7ef',
-          300: '#01598b',
-          400: '#034b70',
-          500: '#007494', // Color principal
-          600: '#034b70',
-          700: '#007f73',
-          800: '#00554c',
-          900: '#002a26',
+          50: '#f1f4ef',
+          100: '#e3eadf',
+          200: '#c9d6c3',
+          300: '#acc0a4',
+          400: '#8aa482',
+          500: '#6b8a63',
+          600: '#56734f',
+          700: '#455c40',
+          800: '#354631',
+          900: '#232e21',
+        },
+        lavender: {
+          100: '#efeaf6',
+          200: '#ddd3ec',
+          300: '#cbbde2',
         },
         secondary: {
-          50: '#f7f7f7',
-          100: '#e3e3e3',
-          200: '#c8c8c8',
-          300: '#a4a4a4',
-          400: '#818181',
-          500: '#666666', // Color secundario
-          600: '#515151',
-          700: '#434343',
-          800: '#383838',
-          900: '#000000',
+          50: '#f7f6f2',
+          100: '#ebe9e3',
+          200: '#e2e0d8',
+          300: '#c3c1b8',
+          400: '#8f8d85',
+          500: '#55554f',
+          600: '#45453f',
+          700: '#35352f',
+          800: '#26261f',
+          900: '#1d1d1b',
         },
-        accent: {
-          50: '#f5f3ff',
-          100: '#ede9fe',
-          200: '#ddd6fe',
-          300: '#c4b5fd',
-          400: '#a78bfa',
-          500: '#8b5cf6', // Color de acento
-          600: '#7c3aed',
-          700: '#6d28d9',
-          800: '#5b21b6',
-          900: '#4c1d95',
-        }
-      }
+      },
+      fontFamily: {
+        serif: ['"Instrument Serif"', 'Georgia', 'serif'],
+        sans: ['Manrope', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+      },
     },
     container: {
       center: true,
@@ -51,8 +54,8 @@ export default {
     function ({ addBase, theme }) {
       addBase({
         'a:focus-visible, button:focus-visible': {
-          outline: `2px solid ${theme('colors.primary.400')}`,
-          outlineOffset: '2px',
+          outline: `2px solid ${theme('colors.primary.600')}`,
+          outlineOffset: '3px',
         },
       });
     },

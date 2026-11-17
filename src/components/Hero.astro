@@ -1,33 +1,36 @@
 ---
-import HeroBackground from './HeroBackground.astro';
+import { Image } from 'astro:assets';
+import { WHATSAPP_BOOKING_URL } from '../lib/seo';
+import heroImg from '../assets/clinica/1.jpeg';
 ---
 
-<section
-  id="inicio"
-  class="relative overflow-hidden -mx-4 md:-mx-8 lg:-mx-16 xl:-mx-32 px-4 md:px-8 lg:px-16 xl:px-32 min-h-screen flex flex-col items-center justify-center"
->
-  <HeroBackground />
-  <div class="hero-enter relative mx-auto max-w-3xl text-center">
-    <h1
-      class="text-3xl md:text-4xl font-bold text-primary-500 mb-6 leading-tight"
-      style="--i: 0"
-    >
-    Evaluación, diagnóstico e intervención psicológica de neurodivergencias en Torrent
+<section id="inicio" class="relative isolate overflow-hidden grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] items-center pt-24 lg:pt-0 lg:min-h-[100svh] lg:max-h-[960px]">
+  <div class="hero-enter pl-edge pr-[var(--gutter)] lg:pr-10 pt-10 pb-14 lg:py-32">
+    <h1 class="display text-[3.1rem] sm:text-7xl xl:text-[5.6rem] text-ink" style="--i: 0">
+      Un espacio para comprender, crecer y sentirte acompañado.
     </h1>
-    <p
-      class="text-xl text-secondary-500 mb-10 leading-relaxed mx-auto max-w-2xl"
-      style="--i: 1"
-    >
-      Tu bienestar emocional es nuestra prioridad en Torrent (Valencia).
-      Descubre un espacio seguro donde encontrarás apoyo profesional y
-      comprensión para tu desarrollo personal.
+    <p class="mt-8 max-w-md text-base md:text-[1.0625rem] leading-relaxed text-ink-soft" style="--i: 1">
+      Psicología, logopedia y atención multidisciplinar en Torrent. Evaluamos, diagnosticamos y acompañamos a niños, adolescentes y adultos.
     </p>
-    <a
-      href="#contacto"
-      class="btn-press inline-block text-white bg-primary-500 px-8 py-4 rounded-full text-lg font-semibold hover:bg-primary-600 shadow-md"
-      style="--i: 2"
-    >
-      Pide tu cita
-    </a>
+    <div class="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5" style="--i: 2">
+      <a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" class="btn">Reserva tu cita</a>
+      <a href="#el-centro" class="link-line text-ink">Conoce el centro</a>
+    </div>
+  </div>
+
+  <div class="hero-media relative h-[26rem] sm:h-[34rem] lg:h-full lg:min-h-[44rem]" aria-hidden="false">
+    <div class="blob left-[2%] top-[14%] h-[70%] w-[60%] bg-primary-300 rounded-[50%_50%_45%_55%/55%_45%_55%_45%]" style="--i: 0" aria-hidden="true"></div>
+    <div class="absolute inset-y-0 right-0 left-[16%] overflow-hidden rounded-[62%_0_0_38%/48%_0_0_30%]" style="--i: 1">
+      <Image
+        src={heroImg}
+        alt="Consulta de la clínica 21 Días con sillón y escritorio"
+        widths={[480, 768, 1050]}
+        sizes="(max-width: 1024px) 85vw, 45vw"
+        loading="eager"
+        fetchpriority="high"
+        class="photo h-full w-full object-cover object-[50%_60%]"
+      />
+    </div>
+    <div class="absolute -right-[12%] -bottom-[14%] h-[52%] w-[52%] rounded-full bg-lavender-200" style="--i: 2" aria-hidden="true"></div>
   </div>
 </section>

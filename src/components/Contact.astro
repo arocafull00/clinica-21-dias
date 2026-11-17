@@ -1,168 +1,38 @@
 ---
-import InstagramIcon from "../svgs/instagram-icon.astro";
-import WhatsappIcon from "../svgs/Whatsapp-icon.astro";
-const whatsappNumber = "+34640205738";
-const whatsappMessage = "Hola! Me gustaría obtener más información sobre vuestras terapias";
+import { MAP_URL, WHATSAPP_BOOKING_URL } from "../lib/seo";
 
-const contactLinks = [
-  {
-    href: "https://maps.app.goo.gl/hLzTC1JKWWrvXPjv6",
-    external: true,
-    label: "Calle San Valeriano 20A - Torrent,Valencia",
-    icon: "location",
-  },
-  {
-    href: "tel:+34640205738",
-    external: false,
-    label: "+34 640 20 57 38",
-    icon: "phone",
-  },
-  {
-    href: `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`,
-    external: true,
-    label: "WhatsApp: +34 640 20 57 38",
-    icon: "whatsapp",
-  },
-  {
-    href: "mailto:clinica@21diaspsicoeducacion.es",
-    external: false,
-    label: "clinica@21diaspsicoeducacion.es",
-    icon: "email",
-  },
-  {
-    href: "https://www.instagram.com/21diaspsicoeducacion/",
-    external: true,
-    label: "@21diaspsicoeducacion",
-    icon: "instagram",
-  },
-];
 ---
 
-<section class="py-20" id="contacto">
-  <div class="mx-auto">
-    <h2
-      class="text-4xl font-bold text-center text-gray-800 mb-12"
-      data-reveal
-    >
-      <span class="text-primary-500">Contacta</span> con nosotros
-    </h2>
-    <div class="max-w-5xl mx-auto">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div class="space-y-6">
-          <h3 class="text-2xl font-semibold mb-6 text-gray-800" data-reveal>
-            Información de contacto
-          </h3>
-          <div class="space-y-6">
-            {
-              contactLinks.map((link, index) => (
-                <a
-                  href={link.href}
-                  target={link.external ? "_blank" : undefined}
-                  rel={link.external ? "noopener noreferrer" : undefined}
-                  data-reveal
-                  style={`--i: ${index + 1}`}
-                  class="contact-link flex items-center space-x-4 text-gray-600 hover:text-primary-500"
-                >
-                  {link.icon === "location" && (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6 shrink-0"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-                      />
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-                      />
-                    </svg>
-                  )}
-                  {link.icon === "phone" && (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6 shrink-0"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                      />
-                    </svg>
-                  )}
-                  {link.icon === "whatsapp" && (
-                    <WhatsappIcon class="w-5 h-5 shrink-0" aria-hidden="true" />
-                  )}
-                  {link.icon === "email" && (
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="h-6 w-6 shrink-0"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                      />
-                    </svg>
-                  )}
-                  {link.icon === "instagram" && (
-                    <InstagramIcon class="w-5 h-5 shrink-0" aria-hidden="true" />
-                  )}
-                  <span>{link.label}</span>
-                </a>
-              ))
-            }
+<section id="contacto" class="relative isolate overflow-hidden border-t border-ink-line py-20 lg:py-28">
+  <div class="blob -left-[14%] -bottom-[40%] h-[30rem] w-[36rem] rounded-[50%] bg-lavender-200 md:-left-[8%] md:-bottom-[55%]" aria-hidden="true"></div>
+  <div class="wrap grid gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:items-center">
+    <div data-reveal>
+      <p class="eyebrow">Contacto</p>
+      <h2 class="display mt-7 text-6xl md:text-7xl text-ink">Reserva tu cita.</h2>
+      <a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" class="btn btn-dark mt-10">
+        Escríbenos por WhatsApp
+      </a>
+    </div>
 
-            <div
-              data-reveal
-              style="--i: 6"
-              class="flex items-start space-x-4 text-gray-600 flex-row"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 shrink-0"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-              <div class="flex flex-col">
-                <span><strong>Mañanas</strong> Lunes, miércoles y jueves 9:30 - 14:00</span>
-                <span><strong>Tardes</strong> de lunes a viernes 16:00 - 21:00</span>
-              </div>
-            </div>
-          </div>
+    <div class="grid gap-10 text-[0.9375rem] leading-relaxed text-ink sm:grid-cols-2 sm:gap-0 sm:divide-x sm:divide-ink-line" data-reveal style="--i: 1">
+      <address class="not-italic space-y-4 sm:pr-10">
+        <a href={MAP_URL} target="_blank" rel="noopener noreferrer" class="block hover:text-primary-600 transition-colors">
+          Calle San Valeriano 20A<br />Torrent, Valencia
+        </a>
+        <a href="tel:+34640205738" class="block hover:text-primary-600 transition-colors">+34 640 20 57 38</a>
+        <a href="mailto:clinica@21diaspsicoeducacion.es" class="block break-all hover:text-primary-600 transition-colors">clinica@21diaspsicoeducacion.es</a>
+        <a href="https://www.instagram.com/21diaspsicoeducacion/" target="_blank" rel="noopener noreferrer" class="block hover:text-primary-600 transition-colors">@21diaspsicoeducacion</a>
+      </address>
+      <dl class="space-y-5 sm:pl-10">
+        <div>
+          <dt class="text-ink-soft">Lunes, miércoles y jueves</dt>
+          <dd class="font-semibold">9:30 – 14:00</dd>
         </div>
-
-        <div class="hidden md:block" data-reveal style="--i: 2">
-          <img src="/svg/learning.svg" alt="Contacto con la clínica de psicología en Torrent" />
+        <div>
+          <dt class="text-ink-soft">De lunes a viernes</dt>
+          <dd class="font-semibold">16:00 – 21:00</dd>
         </div>
-      </div>
+      </dl>
     </div>
   </div>
 </section>

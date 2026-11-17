@@ -9,3 +9,4 @@ export function businessId(siteBase: URL | string): string {
 	const base = typeof siteBase === 'string' ? siteBase.replace(/\/$/, '') : siteBase.href.replace(/\/$/, '');
 	return `${base}${BUSINESS_ID_FRAGMENT}`;
 }
+export const WHATSAPP_BOOKING_URL = `https://wa.me/34640205738?text=${encodeURIComponent('Hola! Me gustaría reservar una cita')}`;

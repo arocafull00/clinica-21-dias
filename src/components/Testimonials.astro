@@ -3,52 +3,30 @@ const testimonials = [
   {
     name: "María G.",
     text: "La atención en 21 días ha sido excepcional. Me han ayudado a superar momentos muy difíciles con profesionalidad y cercanía.",
-    rating: 5,
   },
   {
     name: "Carlos P.",
     text: "Gracias a la terapia he conseguido herramientas muy valiosas para gestionar mi ansiedad. Totalmente recomendable.",
-    rating: 5,
   },
   {
     name: "Laura S.",
     text: "Hicieron una evaluación súper completa a mi hijo de 9 años, con un informe con todas las pruebas y el diagnóstico. Estamos encantados con todo el equipo.",
-    rating: 5,
   },
 ];
 ---
 
-<section class="py-20 bg-primary-100/40 rounded-t-3xl" id="testimonios">
-  <div class="container mx-auto px-4">
-    <h2
-      class="text-4xl font-bold text-center text-gray-800 mb-12"
-      data-reveal
-    >
-      Lo que dicen nuestros <span class="text-primary-500">pacientes</span>
-    </h2>
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<section id="testimonios" class="py-20 lg:py-28">
+  <div class="wrap">
+    <h2 class="eyebrow" data-reveal>Lo que nos cuentan</h2>
+    <div class="mt-12 grid gap-12 md:grid-cols-3 md:gap-0 md:divide-x md:divide-ink-line">
       {
         testimonials.map((testimonial, index) => (
-          <div
-            data-reveal
-            style={`--i: ${index}`}
-            class="card-lift bg-white p-6 rounded-lg shadow-md"
-          >
-            <div
-              class="flex justify-center mb-4 gap-0.5"
-              aria-label={`Valoración: ${testimonial.rating} de 5 estrellas`}
-            >
-              {Array.from({ length: testimonial.rating }).map(() => (
-                <span class="text-primary-500" aria-hidden="true">
-                  ★
-                </span>
-              ))}
-            </div>
-            <p class="text-gray-600 mb-4 italic">"{testimonial.text}"</p>
-            <p class="text-gray-800 font-semibold text-right">
-              - {testimonial.name}
-            </p>
-          </div>
+          <figure data-reveal style={`--i: ${index}`} class="md:px-10 md:first:pl-0 md:last:pr-0">
+            <blockquote class="font-serif text-[1.65rem] leading-[1.2] text-ink">
+              “{testimonial.text}”
+            </blockquote>
+            <figcaption class="mt-6 text-sm font-semibold text-ink-soft">{testimonial.name}</figcaption>
+          </figure>
         ))
       }
     </div>

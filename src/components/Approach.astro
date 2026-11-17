@@ -1,0 +1,55 @@
+---
+import { Image } from 'astro:assets';
+import approachImg from '../assets/clinica/5.jpeg';
+
+const steps = [
+	'Entrevista inicial',
+	'Pruebas de evaluación',
+	'Valoración diferencial',
+	'Elaboración del informe',
+	'Devolución de resultados',
+];
+---
+
+<section id="enfoque" class="relative isolate overflow-hidden py-20 lg:py-28">
+	<div class="grid items-center gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,4fr)_minmax(0,3.4fr)] lg:gap-12 lg:pr-edge">
+		<div class="relative h-[22rem] sm:h-[28rem] lg:h-[30rem] mr-[var(--gutter)] lg:mr-0" data-reveal>
+			<div class="blob -left-[6%] top-[-4%] h-[70%] w-[52%] rounded-[0_60%_55%_0/0_55%_60%_0] bg-primary-300" aria-hidden="true"></div>
+			<div class="absolute inset-y-[6%] left-0 right-0 overflow-hidden rounded-[0_58%_46%_0/0_52%_58%_0]">
+				<Image
+					src={approachImg}
+					alt="Sala de terapia con mesa redonda y alfombra"
+					widths={[480, 768, 902]}
+					sizes="(max-width: 1024px) 95vw, 40vw"
+					loading="lazy"
+					class="photo h-full w-full object-cover object-[50%_65%]"
+				/>
+			</div>
+		</div>
+
+		<div class="px-[var(--gutter)] lg:px-0" data-reveal style="--i: 1">
+			<p class="eyebrow">Nuestro enfoque</p>
+			<h2 class="display mt-7 text-5xl md:text-[3.6rem] text-ink">
+				Cada persona es diferente. Su evaluación también.
+			</h2>
+		</div>
+
+		<div class="px-[var(--gutter)] lg:px-0" data-reveal style="--i: 2">
+			<p class="text-[0.9375rem] leading-relaxed text-ink-soft">
+				Realizamos un proceso de evaluación diagnóstica personalizado, con un equipo multidisciplinar que analiza cada caso de forma conjunta.
+			</p>
+			<ol class="mt-8 space-y-4">
+				{
+					steps.map((step, index) => (
+						<li class="flex items-center gap-4 text-[0.9375rem] text-ink">
+							<span class="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-primary-200 text-[0.6875rem] font-semibold text-primary-800">
+								{String(index + 1).padStart(2, '0')}
+							</span>
+							{step}
+						</li>
+					))
+				}
+			</ol>
+		</div>
+	</div>
+</section>

@@ -1,39 +1,55 @@
 ---
-import ServiceCard from './ServiceCard.astro';
 import { services } from '../data/services';
-
-type ServiceVariant = 'featured' | 'default';
-
-function getVariant(index: number): ServiceVariant {
-	if (index === 0) return 'featured';
-	return 'default';
-}
 ---
 
-<section class="py-20" id="nuestros-servicios">
-	<div class="mx-auto">
-		<h2 class="text-4xl font-bold text-center mb-12" data-reveal>
-			Nuestros
-			<span class="bg-gradient-to-r from-primary-600 to-primary-400 bg-clip-text text-transparent relative">
-				Servicios
-				<span class="absolute -bottom-2 left-0 w-full h-1 bg-gradient-to-r from-primary-600 to-primary-400 rounded-full"></span>
-			</span>
-		</h2>
-		<div
-			class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4 lg:gap-5 md:auto-rows-[minmax(11rem,auto)]"
-		>
+<section id="servicios" class="relative isolate overflow-hidden py-24 lg:py-32">
+	<div class="blob -right-[8%] -bottom-[30%] h-[26rem] w-[34rem] rounded-[50%] bg-lavender-200" aria-hidden="true"></div>
+	<div class="wrap grid gap-14 lg:grid-cols-[minmax(0,5fr)_minmax(0,8fr)] lg:gap-16">
+		<div data-reveal>
+			<p class="eyebrow">Servicios</p>
+			<h2 class="display mt-7 text-5xl md:text-6xl text-ink">
+				Un equipo, diferentes formas de acompañarte.
+			</h2>
+		</div>
+
+		<ul class="services-grid grid sm:grid-cols-2 lg:grid-cols-3 self-center">
 			{
 				services.map((service, index) => (
-					<ServiceCard
-						icon={service.icon}
-						title={service.title}
-						description={service.description}
-						url={service.url}
-						index={index}
-						variant={getVariant(index)}
-					/>
+					<li data-reveal style={`--i: ${index}`}>
+						<a
+							href={service.url}
+							class="service-link flex h-full min-h-[5.5rem] items-center justify-between gap-6 px-1 py-6 sm:px-6 lg:min-h-[7.5rem] transition-colors hover:bg-white/60"
+						>
+							<span class="text-[1.0625rem] leading-snug text-ink max-w-[11rem]">{service.name}</span>
+							<svg class="arrow h-4 w-4 shrink-0 text-ink" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+								<path d="M4 12h16M14 6l6 6-6 6"></path>
+							</svg>
+						</a>
+					</li>
 				))
 			}
-		</div>
+		</ul>
 	</div>
 </section>
+
+<style>
+	.services-grid li {
+		border-top: 1px solid #e2e0d8;
+	}
+
+	@media (min-width: 640px) and (max-width: 1023px) {
+		.services-grid li:nth-child(2n) {
+			border-left: 1px solid #e2e0d8;
+		}
+	}
+
+	@media (min-width: 1024px) {
+		.services-grid li:nth-child(-n + 3) {
+			border-top: 0;
+		}
+
+		.services-grid li:not(:nth-child(3n + 1)) {
+			border-left: 1px solid #e2e0d8;
+		}
+	}
+</style>
