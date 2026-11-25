@@ -5,11 +5,12 @@ import Footer from '../../../components/Footer.astro';
 import VideoCard from '../../../components/formacion/VideoCard.astro';
 import PagoModal from '../../../components/formacion/PagoModal.astro';
 import {
-	ACCESO_VITALICIO,
-	ACCESO_STORAGE_KEY,
 	AUDIENCIA_LABEL,
+	COMPRAS_STORAGE_KEY,
+	INCLUYE_COMPRA,
 	contenidos,
 	formatoDuracion,
+	formatoPrecio,
 	urlReproductor,
 } from '../../../data/formacion';
 import { SITE_NAME } from '../../../lib/seo';
@@ -20,11 +21,11 @@ export function getStaticPaths() {
 
 const { item } = Astro.props;
 const ver = urlReproductor(item);
-const precio = `${ACCESO_VITALICIO.precio} ${ACCESO_VITALICIO.moneda}`;
+const precio = formatoPrecio(item.precio);
 const audiencia = item.audiencia.map((a) => AUDIENCIA_LABEL[a]);
 const incluye = [
 	`${item.lecciones.length} ${item.lecciones.length === 1 ? 'lección' : 'lecciones'} en vídeo · ${formatoDuracion(item.minutos)}`,
-	...(item.gratis ? ['Acceso libre, sin registro'] : ACCESO_VITALICIO.incluye),
+	...(item.gratis ? ['Acceso libre, sin registro'] : INCLUYE_COMPRA),
 ];
 const relacionados = [
 	...contenidos.filter((c) => c.slug !== item.slug && c.tema === item.tema),
@@ -63,7 +64,6 @@ const relacionados = [
 				<div class="hero-enter">
 					<p class="text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-ink-soft" style="--i: 1">{item.formato} · Para {audiencia.join(' y ').toLowerCase()}</p>
 					<h1 class="display mt-4 text-[2.75rem] sm:text-5xl xl:text-6xl text-ink" style="--i: 2">{item.titulo}</h1>
-					<p class="mt-5 text-base md:text-[1.0625rem] leading-relaxed text-ink-soft" style="--i: 3">{item.descripcion}</p>
 
 					<div class="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-[0.875rem]" style="--i: 4">
 						<span class="rounded-full bg-primary-800 px-3 py-1 font-semibold text-white">{formatoDuracion(item.minutos)}</span>
@@ -92,11 +92,11 @@ const relacionados = [
 										<p class="font-serif text-3xl text-ink">
 											{precio} <span class="font-sans text-[0.875rem] text-ink-soft">pago único</span>
 										</p>
-										<p class="mt-1 text-[0.875rem] text-ink-soft">Acceso vitalicio a este y a todos los contenidos.</p>
+										<p class="mt-1 text-[0.875rem] text-ink-soft">Acceso para siempre a este curso.</p>
 										<button type="button" class="btn mt-5" data-abrir-pago data-clic="formacion-obtener-acceso">Obtener acceso</button>
 									</div>
 									<div class="hidden" data-cta-acceso>
-										<p class="font-serif text-3xl text-ink">Ya tienes acceso</p>
+										<p class="font-serif text-3xl text-ink">Ya tienes este curso</p>
 										<a href={ver} class="btn mt-5">Ver ahora</a>
 									</div>
 								</>
@@ -156,15 +156,15 @@ const relacionados = [
 		</section>
 	</main>
 
-	{!item.gratis && <PagoModal destino={ver} concepto="Acceso vitalicio a toda la formación" />}
+	{!item.gratis && <PagoModal slug={item.slug} titulo={item.titulo} precio={item.precio} destino={ver} />}
 	<Footer />
-	<script define:vars={{ key: ACCESO_STORAGE_KEY, gratis: item.gratis, ver }}>
-		// Si ya se "pagó" (acceso simulado), se muestra el botón para ver directamente.
+	<script define:vars={{ key: COMPRAS_STORAGE_KEY, slug: item.slug, gratis: item.gratis, ver }}>
+		// Si este curso ya se "compró" (simulado), se muestra el botón para verlo directamente.
 		const aplicarAcceso = () => {
 			if (gratis) return;
 			let tiene = false;
 			try {
-				tiene = localStorage.getItem(key) === 'true';
+				tiene = JSON.parse(localStorage.getItem(key) ?? '[]').includes(slug);
 			} catch {}
 			if (!tiene) return;
 			document.querySelector('[data-cta-pago]')?.classList.add('hidden');

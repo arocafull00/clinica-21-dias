@@ -1,5 +1,6 @@
 // Datos de ejemplo (mock) de la sección Formación.
 // No hay pagos reales: el modal de pago solo enseña el flujo y lleva al reproductor.
+// Cada contenido de pago se compra por separado (pago único por curso).
 import type { ImageMetadata } from 'astro';
 import miniatura1 from '../assets/formacion/miniatura-1.webp';
 import miniatura2 from '../assets/formacion/miniatura-2.webp';
@@ -10,20 +11,18 @@ export const PONENTE = 'Clara Franco';
 // Vídeo de ejemplo para el reproductor. Cada contenido puede tener el suyo en `video`.
 export const VIDEO_DEMO = 'https://cdn.pixabay.com/video/2015/08/08/125-135736646_medium.mp4';
 
-export const ACCESO_VITALICIO = {
-	precio: 149,
-	moneda: '€',
-	resumen: 'Un único pago. Acceso para siempre a todos los cursos y a los que vayan llegando.',
-	incluye: [
-		'Todos los cursos, clases y vídeos de la plataforma',
-		'Contenido nuevo cada mes sin coste adicional',
-		'Materiales descargables en PDF',
-		'Acceso desde ordenador, tablet y móvil',
-	],
-};
+export const MONEDA = '€';
+export const formatoPrecio = (precio: number) => `${precio} ${MONEDA}`;
 
-// Clave de localStorage que marca el acceso simulado tras el "pago".
-export const ACCESO_STORAGE_KEY = 'formacion-acceso-demo';
+// Lo que incluye la compra de cada curso (pago único por curso).
+export const INCLUYE_COMPRA = [
+	'Acceso para siempre a este curso',
+	'Materiales descargables en PDF',
+	'Acceso desde ordenador, tablet y móvil',
+];
+
+// Clave de localStorage con los slugs de los cursos "comprados" en la demo.
+export const COMPRAS_STORAGE_KEY = 'formacion-compras-demo';
 
 const miniaturas = [miniatura1, miniatura2, miniatura3];
 
@@ -49,11 +48,13 @@ type ContenidoBase = {
 	minutos: number;
 	valoracion: number;
 	gratis: boolean;
+	precio?: number; // solo contenidos de pago
 	publicado: string; // ISO
 	video?: string;
 };
 
 export type Contenido = ContenidoBase & {
+	precio: number; // 0 si es gratis
 	ponente: string;
 	miniatura: ImageMetadata;
 	video: string;
@@ -78,6 +79,7 @@ const base: ContenidoBase[] = [
 		minutos: 95,
 		valoracion: 4.9,
 		gratis: false,
+		precio: 59,
 		publicado: '2026-11-18',
 	},
 	{
@@ -98,6 +100,7 @@ const base: ContenidoBase[] = [
 		minutos: 110,
 		valoracion: 4.9,
 		gratis: false,
+		precio: 79,
 		publicado: '2026-11-12',
 	},
 	{
@@ -124,6 +127,7 @@ const base: ContenidoBase[] = [
 		minutos: 28,
 		valoracion: 4.7,
 		gratis: false,
+		precio: 19,
 		publicado: '2026-10-28',
 	},
 	{
@@ -156,6 +160,7 @@ const base: ContenidoBase[] = [
 		minutos: 120,
 		valoracion: 4.8,
 		gratis: false,
+		precio: 79,
 		publicado: '2026-10-09',
 	},
 	{
@@ -182,6 +187,7 @@ const base: ContenidoBase[] = [
 		minutos: 35,
 		valoracion: 4.7,
 		gratis: false,
+		precio: 25,
 		publicado: '2026-09-18',
 	},
 	{
@@ -195,6 +201,7 @@ const base: ContenidoBase[] = [
 		minutos: 80,
 		valoracion: 4.6,
 		gratis: false,
+		precio: 59,
 		publicado: '2026-08-22',
 	},
 	{
@@ -221,6 +228,7 @@ const base: ContenidoBase[] = [
 		minutos: 42,
 		valoracion: 4.9,
 		gratis: false,
+		precio: 29,
 		publicado: '2026-07-29',
 	},
 	{
@@ -234,12 +242,14 @@ const base: ContenidoBase[] = [
 		minutos: 70,
 		valoracion: 4.7,
 		gratis: false,
+		precio: 69,
 		publicado: '2026-07-15',
 	},
 ];
 
 export const contenidos: Contenido[] = base.map((c, i) => ({
 	...c,
+	precio: c.gratis ? 0 : (c.precio ?? 0),
 	ponente: PONENTE,
 	miniatura: miniaturas[i % miniaturas.length],
 	video: c.video ?? VIDEO_DEMO,
@@ -261,7 +271,7 @@ export const categorias: Categoria[] = [
 		slug: 'cursos',
 		nombre: 'Cursos',
 		titulo: 'Cursos',
-		descripcion: 'Formación completa, de principio a fin, sobre cada neurodivergencia. Incluida en el acceso vitalicio.',
+		descripcion: 'Formación completa, de principio a fin, sobre cada neurodivergencia. Cada curso se compra por separado, con un pago único.',
 		filtro: (c) => c.formato === 'Curso',
 	},
 	{

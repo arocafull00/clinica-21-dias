@@ -3,6 +3,7 @@ import { Image } from 'astro:assets';
 import {
 	AUDIENCIA_LABEL,
 	formatoDuracion,
+	formatoPrecio,
 	rangoDuracion,
 	urlContenido,
 	type Contenido,
@@ -48,7 +49,7 @@ const audiencia = item.audiencia.map((a) => AUDIENCIA_LABEL[a]).join(' y ');
 							<rect x="4" y="11" width="16" height="10" rx="2"></rect>
 							<path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
 						</svg>
-						Acceso vitalicio
+						<span data-badge-precio>{formatoPrecio(item.precio)}</span>
 					</span>
 				)}
 			</div>
