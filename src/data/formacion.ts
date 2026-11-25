@@ -8,8 +8,14 @@ import miniatura3 from '../assets/formacion/miniatura-3.webp';
 
 export const PONENTE = 'Clara Franco';
 
-// Vídeo de ejemplo para el reproductor. Cada contenido puede tener el suyo en `video`.
-export const VIDEO_DEMO = 'https://cdn.pixabay.com/video/2015/08/08/125-135736646_medium.mp4';
+// Vídeos de ejemplo servidos desde /public (sin depender de CDNs externos).
+// Cada contenido puede tener el suyo en `video`.
+export const VIDEOS_DEMO = [
+	'/videos/formacion/leccion-1.mp4',
+	'/videos/formacion/leccion-2.mp4',
+	'/videos/formacion/leccion-3.mp4',
+];
+export const VIDEO_DEMO = VIDEOS_DEMO[0];
 
 export const MONEDA = '€';
 export const formatoPrecio = (precio: number) => `${precio} ${MONEDA}`;
@@ -58,6 +64,7 @@ export type Contenido = ContenidoBase & {
 	ponente: string;
 	miniatura: ImageMetadata;
 	video: string;
+	videosLecciones: string[]; // un vídeo por lección
 };
 
 const base: ContenidoBase[] = [
@@ -252,7 +259,8 @@ export const contenidos: Contenido[] = base.map((c, i) => ({
 	precio: c.gratis ? 0 : (c.precio ?? 0),
 	ponente: PONENTE,
 	miniatura: miniaturas[i % miniaturas.length],
-	video: c.video ?? VIDEO_DEMO,
+	video: c.video ?? VIDEOS_DEMO[i % VIDEOS_DEMO.length],
+	videosLecciones: c.lecciones.map((_, j) => c.video ?? VIDEOS_DEMO[(i + j) % VIDEOS_DEMO.length]),
 }));
 
 export const urlContenido = (c: Contenido) => `/formacion/curso/${c.slug}`;

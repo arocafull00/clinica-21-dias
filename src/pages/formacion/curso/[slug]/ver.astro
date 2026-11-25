@@ -35,7 +35,9 @@ const relacionados = contenidos.filter((c) => c.slug !== item.slug).slice(0, 3);
 								loop
 								playsinline
 								controls
-								src={item.video}
+								preload="auto"
+								poster={item.miniatura.src}
+								src={item.videosLecciones[0]}
 								data-video
 							></video>
 						</div>
@@ -60,6 +62,7 @@ const relacionados = contenidos.filter((c) => c.slug !== item.slug).slice(0, 3);
 											type="button"
 											class="leccion flex w-full items-center gap-4 rounded-xl px-3 py-3 text-left transition-colors hover:bg-white/10"
 											data-leccion={i + 1}
+											data-src={item.videosLecciones[i]}
 											aria-current={i === 0 ? 'true' : undefined}
 										>
 											<span class="leccion-num grid h-8 w-8 shrink-0 place-items-center rounded-full bg-white/10 text-[0.8125rem] font-semibold">{i + 1}</span>
@@ -91,7 +94,7 @@ const relacionados = contenidos.filter((c) => c.slug !== item.slug).slice(0, 3);
 </Layout>
 
 <script>
-	// Lecciones de demostración: todas usan el mismo vídeo; al cambiar se reinicia.
+	// Lecciones de demostración: cada una carga su propio vídeo.
 	function initReproductor() {
 		const video = document.querySelector<HTMLVideoElement>('[data-video]');
 		const actual = document.querySelector<HTMLElement>('[data-leccion-actual]');
@@ -103,7 +106,9 @@ const relacionados = contenidos.filter((c) => c.slug !== item.slug).slice(0, 3);
 				botones.forEach((b) => b.removeAttribute('aria-current'));
 				btn.setAttribute('aria-current', 'true');
 				if (actual) actual.textContent = `Lección ${btn.dataset.leccion}`;
-				video.currentTime = 0;
+				const src = btn.dataset.src;
+				if (src && video.getAttribute('src') !== src) video.src = src;
+				else video.currentTime = 0;
 				video.play().catch(() => {});
 				video.scrollIntoView({ behavior: 'smooth', block: 'center' });
 			}),

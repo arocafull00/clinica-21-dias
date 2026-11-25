@@ -10,8 +10,8 @@ colors:
   sage: primary-300 (#acc0a4) para formas, primary-600 (#56734f) para acciones
   lavender: lavender-200 (#ddd3ec)
 typography:
-  display: Instrument Serif 400 (.display), titulares grandes, interlineado ~1
-  body: Manrope 400–700
+  display: Fraunces 400 (.display), titulares grandes, interlineado ~1
+  body: Figtree 400–700
   eyebrow: .eyebrow — 11px, mayúsculas, tracking 0.22em, línea a la derecha
 ---
 
