@@ -1,0 +1,330 @@
+---
+import VideoCard from './VideoCard.astro';
+import PagoModal from './PagoModal.astro';
+import {
+	ACCESO_VITALICIO,
+	ACCESO_STORAGE_KEY,
+	RANGOS_DURACION,
+	categorias,
+	rangoDuracion,
+	type Contenido,
+} from '../../data/formacion';
+
+interface Props {
+	titulo: string;
+	descripcion: string;
+	items: Contenido[];
+	activa?: string; // slug de la categoría activa; undefined = "Todo"
+}
+
+const { titulo, descripcion, items, activa } = Astro.props;
+
+const unicos = (valores: string[]) => [...new Set(valores)].sort((a, b) => a.localeCompare(b, 'es'));
+const filtros = [
+	{ id: 'tema', nombre: 'Tema', opciones: unicos(items.map((i) => i.tema)) },
+	{
+		id: 'duracion',
+		nombre: 'Duración',
+		opciones: RANGOS_DURACION.filter((r) => items.some((i) => rangoDuracion(i.minutos) === r)),
+	},
+	{ id: 'formato', nombre: 'Formato', opciones: unicos(items.map((i) => i.formato)) },
+];
+
+const pestanas = [{ slug: undefined, nombre: 'Todo', href: '/formacion' }, ...categorias.map((c) => ({ slug: c.slug, nombre: c.nombre, href: `/formacion/${c.slug}` }))];
+const hayDePago = items.some((i) => !i.gratis);
+---
+
+<main id="contenido-principal">
+	<section class="relative isolate overflow-hidden pt-32 pb-14 lg:pt-40 lg:pb-20">
+		<div class="blob -right-[10%] -top-[30%] h-[24rem] w-[30rem] rounded-[50%_50%_45%_55%/55%_45%_55%_45%] bg-primary-200" aria-hidden="true"></div>
+		<div class="blob -left-[12%] -bottom-[60%] h-[20rem] w-[26rem] rounded-full bg-lavender-100" aria-hidden="true"></div>
+		<div class="wrap hero-enter">
+			<a href="/formacion" class="eyebrow hover:text-primary-600 transition-colors" style="--i: 0">Formación en neurodivergencias</a>
+			<h1 class="display mt-7 text-5xl sm:text-6xl xl:text-7xl text-ink" style="--i: 1">{titulo}</h1>
+			<p class="mt-6 max-w-xl text-base md:text-[1.0625rem] leading-relaxed text-ink-soft" style="--i: 2">{descripcion}</p>
+		</div>
+	</section>
+
+	<nav class="wrap" aria-label="Secciones de formación">
+		<ul class="tabs flex gap-2 overflow-x-auto border-b border-ink-line pb-4">
+			{
+				pestanas.map((p) => (
+					<li class="shrink-0">
+						<a
+							href={p.href}
+							class:list={[
+								'inline-flex rounded-full px-4 py-2 text-[0.875rem] font-semibold transition-colors',
+								p.slug === activa ? 'bg-ink text-white' : 'text-ink hover:bg-white',
+							]}
+							aria-current={p.slug === activa ? 'page' : undefined}
+						>
+							{p.nombre}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</nav>
+
+	{hayDePago && (
+		<aside class="wrap mt-10" aria-label="Acceso vitalicio">
+			<div class="relative isolate overflow-hidden rounded-[2rem] bg-ink px-7 py-8 text-white md:flex md:items-center md:justify-between md:gap-10 md:px-10">
+				<div class="blob -right-16 -bottom-24 h-56 w-72 rounded-full bg-primary-600/40" aria-hidden="true"></div>
+				<div data-banner-pago class="md:flex md:flex-1 md:items-center md:justify-between md:gap-10">
+					<div>
+						<p class="text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-white/60">Pago único · Acceso vitalicio</p>
+						<p class="mt-3 font-serif text-3xl leading-tight md:text-4xl">
+							Todo el contenido por {ACCESO_VITALICIO.precio} {ACCESO_VITALICIO.moneda}
+						</p>
+						<p class="mt-2 max-w-lg text-[0.9375rem] text-white/70">{ACCESO_VITALICIO.resumen}</p>
+					</div>
+					<button type="button" class="btn mt-6 md:mt-0 shrink-0" data-abrir-pago data-clic="formacion-acceso">Obtener acceso</button>
+				</div>
+				<div data-banner-acceso class="hidden">
+					<p class="text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-white/60">Acceso vitalicio activo</p>
+					<p class="mt-3 font-serif text-3xl leading-tight md:text-4xl">Ya tienes acceso a todo el contenido</p>
+				</div>
+			</div>
+		</aside>
+	)}
+	{hayDePago && <PagoModal />}
+	<div hidden data-acceso-key={ACCESO_STORAGE_KEY}></div>
+
+	<section class="wrap py-10 lg:py-14" data-catalogo>
+		<div class="flex flex-wrap items-center gap-3">
+			<p class="w-full sm:w-auto mr-2 text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-ink">Filtrar por</p>
+			{
+				filtros.map((f, i) => (
+					<div class="filter relative flex-1 sm:flex-none" data-filter={f.id}>
+						<button
+							type="button"
+							class="filter-btn flex w-full sm:min-w-[10rem] items-center justify-between gap-4 rounded-xl border border-ink-line bg-white/70 px-4 py-2.5 text-[0.9375rem] font-medium text-ink transition-colors hover:border-secondary-300"
+							aria-expanded="false"
+							aria-controls={`panel-${f.id}`}
+						>
+							<span class="flex items-center gap-2">
+								{f.nombre}
+								<span class="filter-count hidden rounded-full bg-primary-100 px-2 text-[0.75rem] font-semibold text-primary-700" />
+							</span>
+							<svg class="chev h-4 w-4 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+								<path d="m6 9 6 6 6-6"></path>
+							</svg>
+						</button>
+						<fieldset id={`panel-${f.id}`} class:list={['filter-panel absolute top-full', i === filtros.length - 1 ? 'right-0 sm:left-0 sm:right-auto' : 'left-0']} class=" z-20 mt-2 hidden min-w-[15rem] rounded-xl border border-ink-line bg-white p-2 shadow-[0_14px_36px_-12px_rgb(29_29_27/0.24)]">
+							<legend class="sr-only">{f.nombre}</legend>
+							{f.opciones.map((o) => (
+								<label class="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-[0.9375rem] text-ink hover:bg-paper">
+									<input type="checkbox" value={o} class="h-4 w-4 accent-[#56734f]" />
+									{o}
+								</label>
+							))}
+						</fieldset>
+					</div>
+				))
+			}
+			<label class="mt-2 sm:mt-0 w-full sm:w-auto sm:ml-auto flex items-center gap-3 text-[0.9375rem] font-medium text-ink">
+				<span>Ordenar</span>
+				<select data-orden class="flex-1 sm:flex-none rounded-xl border border-ink-line bg-white/70 px-3 py-2.5 text-[0.9375rem]">
+					<option value="recientes">Más recientes</option>
+					<option value="valorados">Mejor valorados</option>
+					<option value="cortos">Más cortos</option>
+				</select>
+			</label>
+		</div>
+
+		<div class="chips mt-5 hidden flex-wrap items-center gap-3" data-chips>
+			<div class="flex flex-wrap gap-2" data-chip-list></div>
+			<button type="button" class="ml-2 text-[0.9375rem] font-medium text-ink underline underline-offset-4 hover:text-primary-700" data-clear>Borrar todo</button>
+		</div>
+
+		<p class="mt-6 text-[0.875rem] text-ink-soft" aria-live="polite" data-resultados>{items.length} contenidos</p>
+
+		<ul class="mt-6 grid gap-x-6 gap-y-14 sm:grid-cols-2 lg:grid-cols-3" data-grid>
+			{items.map((item, i) => <VideoCard item={item} index={i} />)}
+		</ul>
+
+		<div class="hidden py-20 text-center" data-vacio>
+			<p class="font-serif text-3xl text-ink">No hay contenidos con estos filtros.</p>
+			<button type="button" class="link-line mt-5 text-ink" data-clear>Quitar filtros</button>
+		</div>
+	</section>
+</main>
+
+<script>
+	const FAV_KEY = 'formacion-favoritos';
+	let docListeners: AbortController | undefined;
+
+	const leerFavoritos = (): string[] => {
+		try {
+			return JSON.parse(localStorage.getItem(FAV_KEY) ?? '[]');
+		} catch {
+			return [];
+		}
+	};
+
+	const guardarFavoritos = (favs: string[]) => {
+		try {
+			localStorage.setItem(FAV_KEY, JSON.stringify(favs));
+		} catch {
+			/* sin almacenamiento: los favoritos solo duran en esta visita */
+		}
+	};
+
+	function init() {
+		const root = document.querySelector<HTMLElement>('[data-catalogo]');
+		if (!root || root.dataset.ready) return;
+		root.dataset.ready = 'true';
+
+		// Acceso simulado: si ya se "pagó", el banner lo indica.
+		try {
+			const key = document.querySelector<HTMLElement>('[data-acceso-key]')?.dataset.accesoKey;
+			if (key && localStorage.getItem(key) === 'true') {
+				document.querySelector('[data-banner-pago]')?.classList.add('hidden');
+				document.querySelector('[data-banner-acceso]')?.classList.remove('hidden');
+			}
+		} catch {
+			/* sin almacenamiento */
+		}
+
+		const grid = root.querySelector<HTMLElement>('[data-grid]')!;
+		const cards = [...grid.querySelectorAll<HTMLElement>('[data-card]')];
+		const filtros = [...root.querySelectorAll<HTMLElement>('[data-filter]')];
+		const chips = root.querySelector<HTMLElement>('[data-chips]')!;
+		const chipList = root.querySelector<HTMLElement>('[data-chip-list]')!;
+		const resultados = root.querySelector<HTMLElement>('[data-resultados]')!;
+		const vacio = root.querySelector<HTMLElement>('[data-vacio]')!;
+		const orden = root.querySelector<HTMLSelectElement>('[data-orden]')!;
+
+		const cerrarPaneles = (excepto?: HTMLElement) => {
+			filtros.forEach((f) => {
+				if (f === excepto) return;
+				f.querySelector('.filter-panel')!.classList.add('hidden');
+				f.querySelector('.filter-btn')!.setAttribute('aria-expanded', 'false');
+				f.querySelector('.chev')!.classList.remove('rotate-180');
+			});
+		};
+
+		const seleccion = () =>
+			Object.fromEntries(
+				filtros.map((f) => [
+					f.dataset.filter!,
+					[...f.querySelectorAll<HTMLInputElement>('input:checked')].map((i) => i.value),
+				]),
+			) as Record<string, string[]>;
+
+		const aplicar = () => {
+			const sel = seleccion();
+			let visibles = 0;
+
+			cards.forEach((card) => {
+				const ok = Object.entries(sel).every(([k, vals]) => vals.length === 0 || vals.includes(card.dataset[k]!));
+				card.hidden = !ok;
+				if (ok) visibles++;
+			});
+
+			const criterio = orden.value;
+			[...cards]
+				.sort((a, b) => {
+					if (criterio === 'valorados') return Number(b.dataset.valoracion) - Number(a.dataset.valoracion);
+					if (criterio === 'cortos') return Number(a.dataset.minutos) - Number(b.dataset.minutos);
+					return b.dataset.fecha!.localeCompare(a.dataset.fecha!);
+				})
+				.forEach((c) => grid.appendChild(c));
+
+			filtros.forEach((f) => {
+				const n = sel[f.dataset.filter!].length;
+				const count = f.querySelector<HTMLElement>('.filter-count')!;
+				count.textContent = String(n);
+				count.classList.toggle('hidden', n === 0);
+			});
+
+			chipList.replaceChildren(
+				...Object.entries(sel).flatMap(([k, vals]) =>
+					vals.map((v) => {
+						const b = document.createElement('button');
+						b.type = 'button';
+						b.className =
+							'inline-flex items-center gap-3 rounded-full bg-primary-100 px-4 py-2 text-[0.9375rem] font-medium text-ink transition-colors hover:bg-primary-200';
+						b.setAttribute('aria-label', `Quitar filtro ${v}`);
+						b.innerHTML = `<span></span><svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18"/></svg>`;
+						b.querySelector('span')!.textContent = v;
+						b.addEventListener('click', () => {
+							const input = root.querySelector<HTMLInputElement>(`[data-filter="${k}"] input[value="${CSS.escape(v)}"]`);
+							if (input) input.checked = false;
+							aplicar();
+						});
+						return b;
+					}),
+				),
+			);
+			const hayFiltros = chipList.childElementCount > 0;
+			chips.classList.toggle('hidden', !hayFiltros);
+			chips.classList.toggle('flex', hayFiltros);
+
+			resultados.textContent = `${visibles} ${visibles === 1 ? 'contenido' : 'contenidos'}`;
+			vacio.classList.toggle('hidden', visibles > 0);
+			grid.classList.toggle('hidden', visibles === 0);
+		};
+
+		filtros.forEach((f) => {
+			const btn = f.querySelector<HTMLButtonElement>('.filter-btn')!;
+			const panel = f.querySelector<HTMLElement>('.filter-panel')!;
+			btn.addEventListener('click', () => {
+				const abrir = panel.classList.contains('hidden');
+				cerrarPaneles(f);
+				panel.classList.toggle('hidden', !abrir);
+				btn.setAttribute('aria-expanded', String(abrir));
+				f.querySelector('.chev')!.classList.toggle('rotate-180', abrir);
+			});
+			panel.addEventListener('change', aplicar);
+		});
+
+		docListeners?.abort();
+		docListeners = new AbortController();
+		const { signal } = docListeners;
+		document.addEventListener(
+			'click',
+			(e) => {
+				if (!(e.target as HTMLElement).closest('[data-filter]')) cerrarPaneles();
+			},
+			{ signal },
+		);
+		document.addEventListener(
+			'keydown',
+			(e) => {
+				if (e.key === 'Escape') cerrarPaneles();
+			},
+			{ signal },
+		);
+
+		orden.addEventListener('change', aplicar);
+		root.querySelectorAll('[data-clear]').forEach((b) =>
+			b.addEventListener('click', () => {
+				root.querySelectorAll<HTMLInputElement>('[data-filter] input').forEach((i) => (i.checked = false));
+				aplicar();
+			}),
+		);
+
+		// Favoritos (mock, solo en este navegador)
+		const favs = new Set(leerFavoritos());
+		root.querySelectorAll<HTMLButtonElement>('[data-fav]').forEach((btn) => {
+			const slug = btn.dataset.fav!;
+			btn.setAttribute('aria-pressed', String(favs.has(slug)));
+			btn.addEventListener('click', () => {
+				favs.has(slug) ? favs.delete(slug) : favs.add(slug);
+				btn.setAttribute('aria-pressed', String(favs.has(slug)));
+				guardarFavoritos([...favs]);
+			});
+		});
+
+		aplicar();
+	}
+
+	document.addEventListener('astro:page-load', init);
+</script>
+
+<style>
+	.tabs {
+		scrollbar-width: none;
+	}
+</style>

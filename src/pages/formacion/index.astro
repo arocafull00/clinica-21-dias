@@ -1,0 +1,15 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+import Catalogo from '../../components/formacion/Catalogo.astro';
+import { contenidos } from '../../data/formacion';
+import { SITE_NAME } from '../../lib/seo';
+
+const descripcion =
+	'Vídeos educativos y divulgativos sobre neurodivergencias para psicólogos y familias: TEA, TDAH, altas capacidades, dislexia y más.';
+---
+
+<Layout title={`Formación en neurodivergencias | ${SITE_NAME}`} description={descripcion} includeBusinessJsonLd={false}>
+	<Catalogo titulo="Formación" descripcion={descripcion} items={contenidos} />
+	<Footer />
+</Layout>

@@ -1,0 +1,162 @@
+---
+// Modal de pago de DEMOSTRACIÓN: no hay pasarela ni cargos.
+// Lo abre cualquier elemento con [data-abrir-pago]. Al "pagar" marca el acceso
+// simulado en localStorage y navega a `destino` (o recarga la página si no hay).
+import { ACCESO_VITALICIO, ACCESO_STORAGE_KEY } from '../../data/formacion';
+
+interface Props {
+	destino?: string;
+	concepto?: string;
+}
+
+const { destino, concepto } = Astro.props;
+const precio = `${ACCESO_VITALICIO.precio} ${ACCESO_VITALICIO.moneda}`;
+---
+
+<dialog
+	class="pago-modal w-[calc(100%-2rem)] max-w-md rounded-[1.75rem] bg-paper p-0 text-ink"
+	data-pago-modal
+	data-destino={destino}
+	data-storage-key={ACCESO_STORAGE_KEY}
+	aria-labelledby="pago-titulo"
+>
+	<div class="relative isolate overflow-hidden p-7 sm:p-8" data-paso="form">
+		<div class="blob -right-16 -top-20 h-48 w-56 rounded-full bg-lavender-200" aria-hidden="true"></div>
+		<div class="flex items-start justify-between gap-4">
+			<div>
+				<p class="text-[0.6875rem] font-semibold uppercase tracking-[0.22em] text-ink-soft">Pago único</p>
+				<h2 id="pago-titulo" class="mt-2 font-serif text-[2rem] leading-tight">Acceso vitalicio</h2>
+			</div>
+			<button type="button" class="-mr-2 -mt-1 grid h-10 w-10 place-items-center rounded-full hover:bg-white" data-cerrar-pago aria-label="Cerrar">
+				<svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+					<path d="M6 6l12 12M18 6 6 18"></path>
+				</svg>
+			</button>
+		</div>
+
+		<div class="mt-6 border-y border-ink-line py-4 text-[0.9375rem]">
+			<div class="flex justify-between gap-4">
+				<span>{concepto ?? 'Toda la formación de 21 Días'}</span>
+				<span class="font-semibold">{precio}</span>
+			</div>
+			<p class="mt-1 text-[0.8125rem] text-ink-soft">Incluye todo el catálogo, para siempre.</p>
+		</div>
+
+		<p class="mt-5 rounded-xl bg-primary-100 px-4 py-3 text-[0.8125rem] text-primary-800">
+			Esto es una demostración: no se pide ningún dato real ni se hace ningún cargo.
+		</p>
+
+		<div class="mt-5 grid gap-3 text-[0.9375rem]" aria-label="Datos de pago de prueba">
+			<label class="grid gap-1.5">
+				<span class="text-[0.8125rem] font-medium text-ink-soft">Correo electrónico</span>
+				<input readonly tabindex="-1" value="demo@ejemplo.com" class="rounded-xl border border-ink-line bg-white/70 px-4 py-3 text-ink-soft" />
+			</label>
+			<label class="grid gap-1.5">
+				<span class="text-[0.8125rem] font-medium text-ink-soft">Tarjeta (prueba)</span>
+				<input readonly tabindex="-1" value="4242 4242 4242 4242" class="rounded-xl border border-ink-line bg-white/70 px-4 py-3 tracking-wider text-ink-soft" />
+			</label>
+			<div class="grid grid-cols-2 gap-3">
+				<input readonly tabindex="-1" value="12 / 30" aria-label="Caducidad (prueba)" class="rounded-xl border border-ink-line bg-white/70 px-4 py-3 text-ink-soft" />
+				<input readonly tabindex="-1" value="123" aria-label="CVC (prueba)" class="rounded-xl border border-ink-line bg-white/70 px-4 py-3 text-ink-soft" />
+			</div>
+		</div>
+
+		<button type="button" class="btn mt-7 w-full" data-pagar>
+			<span data-pagar-texto>Pagar {precio}</span>
+		</button>
+	</div>
+
+	<div class="hidden flex-col items-center p-10 text-center" data-paso="ok" role="status">
+		<span class="grid h-16 w-16 place-items-center rounded-full bg-primary-100 text-primary-700">
+			<svg class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+				<path d="m5 12.5 4.5 4.5L19 7.5"></path>
+			</svg>
+		</span>
+		<p class="mt-5 font-serif text-3xl">¡Ya tienes acceso!</p>
+		<p class="mt-2 text-[0.9375rem] text-ink-soft">Te llevamos al contenido…</p>
+	</div>
+</dialog>
+
+<script>
+	import { navigate } from 'astro:transitions/client';
+
+	function initPago() {
+		const modal = document.querySelector<HTMLDialogElement>('[data-pago-modal]');
+		if (!modal || modal.dataset.ready) return;
+		modal.dataset.ready = 'true';
+
+		const form = modal.querySelector<HTMLElement>('[data-paso="form"]')!;
+		const ok = modal.querySelector<HTMLElement>('[data-paso="ok"]')!;
+		const pagar = modal.querySelector<HTMLButtonElement>('[data-pagar]')!;
+		const texto = modal.querySelector<HTMLElement>('[data-pagar-texto]')!;
+		const textoInicial = texto.textContent;
+
+		const reset = () => {
+			form.classList.remove('hidden');
+			ok.classList.add('hidden');
+			ok.classList.remove('flex');
+			pagar.disabled = false;
+			texto.textContent = textoInicial;
+		};
+
+		document.querySelectorAll('[data-abrir-pago]').forEach((btn) =>
+			btn.addEventListener('click', (e) => {
+				e.preventDefault();
+				reset();
+				modal.showModal();
+			}),
+		);
+
+		modal.querySelector('[data-cerrar-pago]')!.addEventListener('click', () => modal.close());
+		// Cerrar al pulsar fuera del cuadro
+		modal.addEventListener('click', (e) => {
+			if (e.target === modal) modal.close();
+		});
+
+		pagar.addEventListener('click', () => {
+			pagar.disabled = true;
+			texto.textContent = 'Procesando…';
+			setTimeout(() => {
+				try {
+					localStorage.setItem(modal.dataset.storageKey!, 'true');
+				} catch {
+					/* sin almacenamiento: el acceso solo dura esta visita */
+				}
+				form.classList.add('hidden');
+				ok.classList.remove('hidden');
+				ok.classList.add('flex');
+				setTimeout(() => {
+					modal.close();
+					const destino = modal.dataset.destino;
+					destino ? navigate(destino) : location.reload();
+				}, 1100);
+			}, 1200);
+		});
+	}
+
+	document.addEventListener('astro:page-load', initPago);
+</script>
+
+<style>
+	.pago-modal::backdrop {
+		background: rgb(29 29 27 / 0.45);
+		backdrop-filter: blur(4px);
+	}
+
+	.pago-modal[open] {
+		animation: pago-in 320ms var(--ease-out-quint);
+	}
+
+	@keyframes pago-in {
+		from {
+			opacity: 0;
+			translate: 0 16px;
+			scale: 0.98;
+		}
+	}
+
+	[data-pagar]:disabled {
+		filter: saturate(0.6);
+		cursor: progress;
+	}
+</style>

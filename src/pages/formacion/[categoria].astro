@@ -1,0 +1,19 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+import Catalogo from '../../components/formacion/Catalogo.astro';
+import { categorias, contenidos } from '../../data/formacion';
+import { SITE_NAME } from '../../lib/seo';
+
+export function getStaticPaths() {
+	return categorias.map((categoria) => ({ params: { categoria: categoria.slug } }));
+}
+
+const categoria = categorias.find((c) => c.slug === Astro.params.categoria)!;
+const items = contenidos.filter(categoria.filtro);
+---
+
+<Layout title={`${categoria.titulo} · Formación | ${SITE_NAME}`} description={categoria.descripcion} includeBusinessJsonLd={false}>
+	<Catalogo titulo={categoria.titulo} descripcion={categoria.descripcion} items={items} activa={categoria.slug} />
+	<Footer />
+</Layout>

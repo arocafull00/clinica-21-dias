@@ -4,5 +4,5 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://21diaspsicoeducacion.es',
-  integrations: [tailwind(), sitemap()],
+  integrations: [tailwind(), sitemap({ filter: (page) => !/\/formacion\/curso\/[^/]+\/ver\/?$/.test(page) })],
 });

@@ -1,5 +1,7 @@
 ---
 import { WHATSAPP_BOOKING_URL } from "../lib/seo";
+import { categorias } from "../data/formacion";
+const formacionLinks = categorias.map((c) => ({ href: `/formacion/${c.slug}`, label: c.nombre }));
 const navLinks = [
   { href: "/#servicios", label: "Servicios" },
   { href: "/#el-centro", label: "El centro" },
@@ -22,6 +24,33 @@ const navLinks = [
             </a>
           ))
         }
+        <div class="nav-drop relative" data-nav-drop>
+          <button
+            type="button"
+            class="nav-link flex items-center gap-1.5 text-[0.9375rem] font-medium text-ink"
+            aria-expanded="false"
+            aria-controls="formacion-menu"
+          >
+            Formación
+            <svg class="nav-drop-chev h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="m6 9 6 6 6-6"></path>
+            </svg>
+          </button>
+          <div id="formacion-menu" class="nav-drop-panel absolute left-1/2 top-full -translate-x-1/2 pt-5">
+            <ul class="w-60 rounded-2xl bg-white p-2 shadow-[0_0_0_1px_rgb(29_29_27/0.06),0_14px_36px_-12px_rgb(29_29_27/0.24)]">
+              <li>
+                <a href="/formacion" class="block rounded-xl px-4 py-2.5 text-[0.9375rem] font-semibold text-ink hover:bg-paper">Toda la formación</a>
+              </li>
+              {
+                formacionLinks.map((link) => (
+                  <li>
+                    <a href={link.href} class="block rounded-xl px-4 py-2.5 text-[0.9375rem] text-ink hover:bg-paper">{link.label}</a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+        </div>
       </div>
 
       <div class="hidden md:flex items-center gap-2">
@@ -71,94 +100,184 @@ const navLinks = [
           </a>
         ))
       }
-      <a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" class="mobile-menu-item btn self-start mt-6" style="--i: 3" data-clic="reserva-menu-movil">Reserva tu cita</a>
+      <div class="mobile-menu-item" style="--i: 3">
+        <a href="/formacion" class="font-serif text-5xl text-ink">Formación</a>
+        <ul class="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+          {
+            formacionLinks.map((link) => (
+              <li>
+                <a href={link.href} class="text-base font-medium text-ink-soft">{link.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <a href={WHATSAPP_BOOKING_URL} target="_blank" rel="noopener noreferrer" class="mobile-menu-item btn self-start mt-6" style="--i: 4" data-clic="reserva-menu-movil">Reserva tu cita</a>
     </div>
   </div>
 </header>
 
 <script>
-  const menuToggle = document.getElementById("menu-toggle");
-  const closeMenuBtn = document.getElementById("close-menu");
-  const mobileMenu = document.getElementById("mobile-menu-panel");
-  const mobileMenuLinks = mobileMenu?.querySelectorAll("a");
+  // Se inicializa en cada navegación: con ClientRouter la cabecera se sustituye
+  // al cambiar de página y hay que volver a enlazar los eventos.
+  let pageListeners: AbortController | undefined;
 
-  let previouslyFocused = null;
-  let menuOpen = false;
+  function initNavbar() {
+    pageListeners?.abort();
+    pageListeners = new AbortController();
+    const { signal } = pageListeners;
 
-  const getFocusableElements = () => {
-    if (!mobileMenu) return [];
-    return [
-      ...mobileMenu.querySelectorAll(
-        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
-      ),
-    ];
-  };
+    const menuToggle = document.getElementById("menu-toggle");
+    const closeMenuBtn = document.getElementById("close-menu");
+    const mobileMenu = document.getElementById("mobile-menu-panel");
+    const mobileMenuLinks = mobileMenu?.querySelectorAll("a");
 
-  const trapTabKey = (e) => {
-    if (e.key !== "Tab" || !menuOpen) return;
-    const focusables = getFocusableElements();
-    if (focusables.length === 0) return;
-    const first = focusables[0];
-    const last = focusables[focusables.length - 1];
-    if (e.shiftKey) {
-      if (document.activeElement === first) {
-        e.preventDefault();
-        (last as HTMLElement).focus();
+    let previouslyFocused: Element | null = null;
+    let menuOpen = false;
+
+    const getFocusableElements = () => {
+      if (!mobileMenu) return [];
+      return [
+        ...mobileMenu.querySelectorAll(
+          'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      ];
+    };
+
+    const trapTabKey = (e: KeyboardEvent) => {
+      if (e.key !== "Tab" || !menuOpen) return;
+      const focusables = getFocusableElements();
+      if (focusables.length === 0) return;
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+      if (e.shiftKey) {
+        if (document.activeElement === first) {
+          e.preventDefault();
+          (last as HTMLElement).focus();
+        }
+        return;
       }
-      return;
-    }
-    if (document.activeElement === last) {
-      e.preventDefault();
-      (first as HTMLElement).focus();
-    }
-  };
+      if (document.activeElement === last) {
+        e.preventDefault();
+        (first as HTMLElement).focus();
+      }
+    };
 
-  const onEscape = (e) => {
-    if (e.key === "Escape") closeMenuHandler();
-  };
+    const onEscape = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeMenuHandler();
+    };
 
-  const openMenu = () => {
-    if (!mobileMenu || !menuToggle) return;
-    previouslyFocused = document.activeElement;
-    menuOpen = true;
-    mobileMenu.removeAttribute("inert");
-    mobileMenu.classList.remove("invisible", "opacity-0");
-    mobileMenu.classList.add("opacity-100");
-    document.body.style.overflow = "hidden";
-    menuToggle.setAttribute("aria-expanded", "true");
-    closeMenuBtn?.focus();
-    document.addEventListener("keydown", onEscape);
-    document.addEventListener("keydown", trapTabKey);
-  };
+    const openMenu = () => {
+      if (!mobileMenu || !menuToggle) return;
+      previouslyFocused = document.activeElement;
+      menuOpen = true;
+      mobileMenu.removeAttribute("inert");
+      mobileMenu.classList.remove("invisible", "opacity-0");
+      mobileMenu.classList.add("opacity-100");
+      document.body.style.overflow = "hidden";
+      menuToggle.setAttribute("aria-expanded", "true");
+      closeMenuBtn?.focus();
+      document.addEventListener("keydown", onEscape, { signal });
+      document.addEventListener("keydown", trapTabKey, { signal });
+    };
 
-  const closeMenuHandler = () => {
-    if (!mobileMenu || !menuToggle) return;
-    menuOpen = false;
-    mobileMenu.classList.remove("opacity-100");
-    mobileMenu.classList.add("opacity-0");
-    menuToggle.setAttribute("aria-expanded", "false");
-    document.removeEventListener("keydown", onEscape);
-    document.removeEventListener("keydown", trapTabKey);
-    setTimeout(() => {
-      mobileMenu.classList.add("invisible");
-      mobileMenu.setAttribute("inert", "");
-      document.body.style.overflow = "";
-      if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus();
-    }, 300);
-  };
+    const closeMenuHandler = () => {
+      if (!mobileMenu || !menuToggle || !menuOpen) return;
+      menuOpen = false;
+      mobileMenu.classList.remove("opacity-100");
+      mobileMenu.classList.add("opacity-0");
+      menuToggle.setAttribute("aria-expanded", "false");
+      document.removeEventListener("keydown", onEscape);
+      document.removeEventListener("keydown", trapTabKey);
+      setTimeout(() => {
+        mobileMenu.classList.add("invisible");
+        mobileMenu.setAttribute("inert", "");
+        document.body.style.overflow = "";
+        if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus();
+      }, 300);
+    };
 
-  menuToggle?.addEventListener("click", openMenu);
-  closeMenuBtn?.addEventListener("click", closeMenuHandler);
+    menuToggle?.addEventListener("click", openMenu);
+    closeMenuBtn?.addEventListener("click", closeMenuHandler);
+    mobileMenuLinks?.forEach((link) => {
+      link.addEventListener("click", closeMenuHandler);
+    });
 
-  mobileMenuLinks?.forEach((link) => {
-    link.addEventListener("click", closeMenuHandler);
-  });
+    // Desplegable "Formación" (escritorio): se abre al pasar el ratón (CSS) o al pulsar.
+    const drop = document.querySelector<HTMLElement>("[data-nav-drop]");
+    const dropBtn = drop?.querySelector("button");
+    const setDrop = (open: boolean) => {
+      if (!drop || !dropBtn) return;
+      drop.toggleAttribute("data-open", open);
+      dropBtn.setAttribute("aria-expanded", String(open));
+    };
+    dropBtn?.addEventListener("click", () => setDrop(!drop!.hasAttribute("data-open")));
+    document.addEventListener(
+      "click",
+      (e) => {
+        if (drop && !drop.contains(e.target as Node)) setDrop(false);
+      },
+      { signal },
+    );
+    document.addEventListener(
+      "keydown",
+      (e) => {
+        if (e.key === "Escape" && drop?.hasAttribute("data-open")) {
+          setDrop(false);
+          dropBtn?.focus();
+        }
+      },
+      { signal },
+    );
+    drop?.addEventListener("focusout", (e) => {
+      if (!drop.contains(e.relatedTarget as Node)) setDrop(false);
+    });
 
-  const header = document.querySelector(".site-header");
+    onScroll();
+  }
+
   const onScroll = () => {
+    const header = document.querySelector(".site-header");
     if (!header) return;
     header.classList.toggle("is-scrolled", window.scrollY > 8);
   };
-  onScroll();
   window.addEventListener("scroll", onScroll, { passive: true });
+
+  document.addEventListener("astro:page-load", initNavbar);
 </script>
+
+<style>
+  .nav-drop-panel {
+    visibility: hidden;
+    opacity: 0;
+    translate: 0 -6px;
+    transition:
+      opacity var(--duration-state) var(--ease-out-quart),
+      translate var(--duration-state) var(--ease-out-quart),
+      visibility 0s linear var(--duration-state);
+  }
+
+  .nav-drop[data-open] .nav-drop-panel {
+    visibility: visible;
+    opacity: 1;
+    translate: 0 0;
+    transition-delay: 0s;
+  }
+
+  @media (hover: hover) {
+    .nav-drop:hover .nav-drop-panel {
+      visibility: visible;
+      opacity: 1;
+      translate: 0 0;
+      transition-delay: 0s;
+    }
+  }
+
+  .nav-drop-chev {
+    transition: rotate var(--duration-state) var(--ease-out-quart);
+  }
+
+  .nav-drop[data-open] .nav-drop-chev {
+    rotate: 180deg;
+  }
+</style>
