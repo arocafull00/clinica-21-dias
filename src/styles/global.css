@@ -60,25 +60,6 @@ p {
 	line-height: 0.98;
 }
 
-.eyebrow {
-	display: flex;
-	align-items: center;
-	gap: 1.25rem;
-	font-size: 0.6875rem;
-	font-weight: 600;
-	letter-spacing: 0.22em;
-	text-transform: uppercase;
-	color: var(--ink);
-}
-
-.eyebrow::after {
-	content: "";
-	height: 1px;
-	width: 5.5rem;
-	background: currentColor;
-	opacity: 0.35;
-}
-
 .btn {
 	display: inline-flex;
 	align-items: center;
@@ -113,6 +94,11 @@ p {
 .btn-sm {
 	padding: 0.6rem 1.15rem;
 	font-size: 0.8125rem;
+}
+
+.btn-lg {
+	padding: 1.2rem 2.5rem;
+	font-size: 1.0625rem;
 }
 
 .btn-dark {
